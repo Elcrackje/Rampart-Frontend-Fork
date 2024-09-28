@@ -1,0 +1,155 @@
+{
+  "tutorials": [],
+  "chefs": [
+    {
+      "id": 1,
+      "name": "Juanito Perez",
+      "rating": 3.3
+    },
+    {
+      "id": 2,
+      "name": "Lala Lopez",
+      "rating": 4.5
+    },
+    {
+      "id": 3,
+      "name": "Estefano Jaque",
+      "rating": 2
+    },
+    {
+      "id": 4,
+      "name": "Juan Torres",
+      "rating": 5
+    },
+    {
+      "id": 5,
+      "name": "Sebastián Real",
+      "rating": "2.5"
+    }
+  ],
+  "nutrients": [
+    {
+      "id": 1,
+      "name": "Ají de gallina",
+      "unit": "25% proteínas (44g), 13% carbohidratos (25.5g), y 64% grasas (53.2g)"
+    },
+    {
+      "id": 2,
+      "name": "Puré de papa",
+      "unit": "8% proteínas (2g), 82% carbohidratos (18g), y 10% grasas (2.2g)"
+    },
+    {
+      "id": 3,
+      "name": "Sopa de casa",
+      "unit": "10% proteínas (5g), 55% carbohidratos (27g), y 35% grasas (7g)"
+    },
+    {
+      "id": 4,
+      "name": "Sancochado de pollo",
+      "unit": "30% proteínas (25g), 40% carbohidratos (33g), y 30% grasas (12g)"
+    }
+  ],
+  "recipes": [
+    {
+      "id": "2",
+      "name_of_dish": "Puré con milanesa",
+      "posted_by": "Maria Jose Pezo",
+      "ingredients": [
+        "2 papas amarillas",
+        "1 taza de leche evaporada",
+        "50g de mantequilla",
+        "2 filetes de carne",
+        "1 huevo",
+        "Pan rallado",
+        "Aceite para freír",
+        "Sal y pimienta"
+      ],
+      "preparation_steps": [
+        "Hierve las papas en agua con sal hasta que estén blandas, luego haz un puré añadiendo leche y mantequilla.",
+        "Sazona los filetes de carne con sal y pimienta.",
+        "Pasa los filetes por huevo batido y luego por pan rallado.",
+        "Fríe los filetes en abundante aceite caliente hasta que estén dorados y crujientes.",
+        "Sirve la milanesa acompañada del puré de papas."
+      ]
+    }
+  ],
+  "dishes": [
+    {
+      "id": 1,
+      "name_of_dish": "Tallarines rojos",
+      "description": "es un plato",
+      "average_price": 20.7,
+      "order_count": "201"
+    },
+    {
+      "id": 2,
+      "name_of_dish": "Pure con milanesa",
+      "description": "es un plato",
+      "average_price": 19.5,
+      "order_count": 180
+    },
+    {
+      "id": 3,
+      "name_of_dish": "Arroz con pollo",
+      "description": "Es un plato",
+      "average_price": "13.50",
+      "order_count": "100"
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "customerId": "1",
+      "orderDate": "2024-09-27",
+      "deliveryDate": "2024-09-28",
+      "paymentMethod": "Tarjeta de Crédito",
+      "totalAmount": 45.5,
+      "status": "pendiente"
+    },
+    {
+      "id": 2,
+      "customerId": "2",
+      "orderDate": "2024-09-26",
+      "deliveryDate": "2024-09-27",
+      "paymentMethod": "Efectivo",
+      "totalAmount": 23.75,
+      "status": "completado"
+    },
+    {
+      "id": 3,
+      "customerId": "3",
+      "orderDate": "2024-09-25",
+      "deliveryDate": "2024-09-26",
+      "paymentMethod": "PayPal",
+      "totalAmount": 30,
+      "status": "en preparación"
+    },
+    {
+      "id": 4,
+      "customerId": "1",
+      "orderDate": "2024-09-24",
+      "deliveryDate": "2024-09-25",
+      "paymentMethod": "Transferencia Bancaria",
+      "totalAmount": 50,
+      "status": "pendiente"
+    },
+    {
+      "id": 5,
+      "customerId": "4",
+      "orderDate": "2024-09-23",
+      "deliveryDate": "2024-09-24",
+      "paymentMethod": "Tarjeta de Débito",
+      "totalAmount": 19.99,
+      "status": "completado"
+    },
+    {
+      "id": 6,
+      "customerId": "5",
+      "orderDate": "2024-09-22",
+      "deliveryDate": "2024-09-23",
+      "paymentMethod": "Efectivo",
+      "totalAmount": "50",
+      "status": "cancelado"
+    }
+  ]
+}
