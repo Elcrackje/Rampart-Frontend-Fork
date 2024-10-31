@@ -23,7 +23,7 @@ export class DishService {
         return http.delete(`${this.resourceEndpoint}/${id}`);
     }
 
-    //findByName(name) {
-    //    return http.get(`${this.resourceEndpoint}?name=${name}`);
-    //}
+    findByFavorite() {
+        return http.get(`${this.resourceEndpoint}?favorite=true`);
+    }
 }
