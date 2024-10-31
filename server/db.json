@@ -142,8 +142,29 @@
       "orderDate": "2024-09-23",
       "deliveryDate": "2024-09-28",
       "paymentMethod": "Tarjeta de credito",
-      "totalAmount": 45.5,
-      "status": "pendiente"
+      "totalAmount": 58.1,
+      "status": "en preparacion",
+      "dishes": [
+        {
+          "name": "Lomo Saltado",
+          "quantity": 1,
+          "price": 15.1,
+          "imageUrl": "/src/assets/lomo-saltado.jpg"
+        },
+        {
+          "name": "Ceviche",
+          "quantity": 1,
+          "price": 18,
+          "imageUrl": "/src/assets/ceviche.jpg"
+        },
+        {
+          "name": "Aji de Gallina",
+          "quantity": 2,
+          "price": 12.5,
+          "imageUrl": "/src/assets/aji-gallina.jpg"
+        }
+      ],
+      "detailsShown": false
     },
     {
       "id": 2,
@@ -152,7 +173,27 @@
       "deliveryDate": "2024-09-27",
       "paymentMethod": "Efectivo",
       "totalAmount": 23.75,
-      "status": "completado"
+      "status": "completado",
+      "dishes": [
+        {
+          "name": "Ceviche",
+          "quantity": 1,
+          "price": 15.1,
+          "imageUrl": "/src/assets/ceviche.jpg"
+        },
+        {
+          "name": "Tallarines Verdes",
+          "quantity": 1,
+          "price": 18,
+          "imageUrl": "/src/assets/tallarines-verdes.jpg"
+        },
+        {
+          "name": "Aji de Gallina",
+          "quantity": 2,
+          "price": 12.5,
+          "imageUrl": "/src/assets/aji-gallina.jpg"
+        }
+      ]
     },
     {
       "id": 3,
@@ -160,8 +201,116 @@
       "orderDate": "2024-09-25",
       "deliveryDate": "2024-09-26",
       "paymentMethod": "Monedero digital",
+      "totalAmount": 58.1,
+      "status": "pendiente",
+      "dishes": [
+        {
+          "name": "Tallarines Verdes",
+          "quantity": 1,
+          "price": 15.1,
+          "imageUrl": "/src/assets/tallarines-verdes.jpg"
+        },
+        {
+          "name": "Lomo Saltado",
+          "quantity": 1,
+          "price": 18,
+          "imageUrl": "/src/assets/lomo-saltado.jpg"
+        },
+        {
+          "name": "Aji de Gallina",
+          "quantity": 2,
+          "price": 12.5,
+          "imageUrl": "/src/assets/aji-gallina.jpg"
+        }
+      ],
+      "detailsShown": false
+    },
+    {
+      "id": 4,
+      "customerId": "2",
+      "orderDate": "2024-09-21",
+      "deliveryDate": "2024-09-26",
+      "paymentMethod": "Monedero digital",
       "totalAmount": 30,
-      "status": "en preparacion"
+      "status": "en preparacion",
+      "dishes": [
+        {
+          "name": "Lomo Saltado",
+          "quantity": 1,
+          "price": 18,
+          "imageUrl": "/src/assets/lomo-saltado.jpg"
+        },
+        {
+          "name": "Aji de Gallina",
+          "quantity": 2,
+          "price": 12.5,
+          "imageUrl": "/src/assets/aji-gallina.jpg"
+        },
+        {
+          "name": "Tallarines Verdes",
+          "quantity": 1,
+          "price": 15.1,
+          "imageUrl": "/src/assets/tallarines-verdes.jpg"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "customerId": "3",
+      "orderDate": "2024-09-22",
+      "deliveryDate": "2024-09-28",
+      "paymentMethod": "Tarjeta de credito",
+      "totalAmount": 70,
+      "status": "completado",
+      "dishes": [
+        {
+          "name": "Lomo Saltado",
+          "quantity": 1,
+          "price": 18,
+          "imageUrl": "/src/assets/lomo-saltado.jpg"
+        },
+        {
+          "name": "Aji de Gallina",
+          "quantity": 2,
+          "price": 12.5,
+          "imageUrl": "/src/assets/aji-gallina.jpg"
+        },
+        {
+          "name": "Tallarines Verdes",
+          "quantity": 1,
+          "price": 15.1,
+          "imageUrl": "/src/assets/tallarines-verdes.jpg"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "customerId": "1",
+      "orderDate": "2024-09-19",
+      "deliveryDate": "2024-09-20",
+      "paymentMethod": "Efectivo",
+      "totalAmount": "40",
+      "status": "pendiente",
+      "dishes": [
+        {
+          "name": "Ceviche",
+          "quantity": 2,
+          "price": 12.5,
+          "imageUrl": "/src/assets/ceviche.jpg"
+        },
+        {
+          "name": "Lomo Saltado",
+          "quantity": 1,
+          "price": 18,
+          "imageUrl": "/src/assets/lomo-saltado.jpg"
+        },
+        {
+          "name": "Tallarines Verdes",
+          "quantity": 1,
+          "price": 15.1,
+          "imageUrl": "/src/assets/tallarines-verdes.jpg"
+        }
+      ]
     }
   ],
   "chefs": [
