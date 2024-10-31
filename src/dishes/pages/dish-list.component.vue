@@ -1,155 +1,206 @@
-<script>
-import { DishEntity } from "../model/dish.entity.js";
-import DataManager from "../../shared/components/data-manager.component.vue";
-import {DishService} from "../services/dish.service.js";
-import DishCreateAndEditDialog from "../components/dish-create-and-edit.component.vue";
-
-export default {
-  name: "dish-list.component",
-  components: {DishCreateAndEditDialog, DataManager },
-  data() {
-    return {
-      title: { singular: "Dish", plural: "Dishes" },
-      dishes: [],
-      dish: new DishEntity({}),
-      selectedDishes: [],
-      dishService: new DishService(),
-      createAndEditDialogIsVisible: false,
-      isEdit: false,
-      submitted: false
-    };
-  },
-  methods: {
-    notifySuccessfulAction(message) {
-      this.$toast.add({ severity: "success", summary: "Success", detail: message, life: 3000 });
-    },
-    findIndexById(id) {
-      return this.dishes.findIndex((dish) => dish.id === id);
-    },
-    async onNewItem() {
-      this.dish = new DishEntity({});
-      this.isEdit = false;
-      this.createAndEditDialogIsVisible = true;
-    },
-    async onEditItem(item) {
-      this.dish = new DishEntity(item);
-      this.isEdit = true;
-      this.submitted = false;
-      this.createAndEditDialogIsVisible = true;
-    },
-    async onDeleteItem(item) {
-      this.dish = new DishEntity(item);
-      await this.deleteDish();
-    },
-    async onDeleteSelectedItems(selectedItems) {
-      this.selectedDishes = selectedItems;
-      await this.deleteSelectedDishes();
-    },
-    onCancelRequested() {
-      this.createAndEditDialogIsVisible = false;
-      this.submitted = false;
-      this.isEdit = false;
-    },
-    async onSaveRequested(item) {
-      this.submitted = true;
-      if (this.dish.name_of_dish.trim()) {
-        if (item.id) {
-          await this.updateDish();
-        } else {
-          await this.createDish();
-        }
-        this.createAndEditDialogIsVisible = false;
-        this.isEdit = false;
-      }
-    },
-    async createDish() {
-      try {
-        const response = await this.dishService.create(this.dish);
-        this.dishes.push(new DishEntity(response.data));
-        this.notifySuccessfulAction("Dish created successfully");
-      } catch (error) {
-        console.error("Error creating Dish:", error);
-      }
-    },
-    async updateDish() {
-      try {
-        const response = await this.dishService.update(this.dish.id, this.dish);
-        const index = this.findIndexById(this.dish.id);
-        this.dishes[index] = new DishEntity(response.data);
-        this.notifySuccessfulAction("Dish updated successfully");
-      } catch (error) {
-        console.error("Error updating Dish:", error);
-      }
-    },
-    async deleteDish() {
-      try {
-        await this.dishService.delete(this.dish.id);
-        const index = this.findIndexById(this.dish.id);
-        this.dishes.splice(index, 1);
-        this.notifySuccessfulAction("Dish deleted successfully");
-      } catch (error) {
-        console.error("Error deleting Dish:", error);
-      }
-    },
-    async deleteSelectedDishes() {
-      try {
-        for (const dish of this.selectedDishes) {
-          await this.dishService.delete(dish.id);
-          const index = this.findIndexById(dish.id);
-          if (index !== -1) {
-            this.dishes.splice(index, 1);
-          }
-        }
-        this.notifySuccessfulAction("Selected Dishes deleted successfully");
-      } catch (error) {
-        console.error("Error deleting selected Dishes:", error);
-      }
-    }
-  },
-  async created() {
-    try {
-      const response = await this.dishService.getAll();
-      this.dishes = response.data.map((dish) => new DishEntity(dish));
-    } catch (error) {
-      console.error("Error fetching Dishes:", error);
-    }
-  }
-};
-</script>
-
 <template>
-  <div class="w-full template">
-    <h1> Platos </h1>
-    <data-manager
-        :title="Dishes"
-        v-bind:items="dishes"
-        v-on:new-item-requested="onNewItem"
-        v-on:edit-item-requested="onEditItem($event)"
-        v-on:delete-item-requested="onDeleteItem($event)"
-        v-on:delete-selected-items-requested="onDeleteSelectedItems($event)"
-    >
-      <template #custom-columns>
-        <pv-column :sortable="true" field="id" header="ID" style="min-width: 12rem"/>
-        <pv-column :sortable="true" field="name_of_dish" header="Nombre del plato" style="min-width: 24rem"/>
-        <pv-column :sortable="true" field="description" header="Descripción" style="min-width: 24rem"/>
-        <pv-column :sortable="true" field="average_price" header="Precio promedio" style="min-width: 24rem"/>
-        <pv-column :sortable="true" field="order_count" header="Conteo de orden mensual" style="min-width: 24rem"/>
-
-      </template>
-    </data-manager>
+  <div class="dish-container">
+    <h2 class="dish-title">Las recetas de nuestros chefs</h2>
+    <pv-input-text v-model="searchQuery" placeholder="Buscar recetas por nombre o ingredientes" class="search-bar"></pv-input-text>
+    <button @click="openCreateDialog">Crear nueva receta</button>
+    <div class="dish-grid">
+      <pv-card v-for="dish in filteredDishes" :key="dish.id" class="dish-card">
+        <template #header>
+          <button class="favorite-button" @click="toggleFavorite(dish)">
+            <i :class="dish.favorite ? 'fas fa-heart' : 'far fa-heart'"></i>
+          </button>
+          <h3>{{ dish.nameOfDish }}</h3>
+        </template>
+        <template #content>
+          <p><strong>Publicado por:</strong> {{ getChefFromId(dish.chefId)?.name || 'Chef desconocido' }}</p>
+          <p><strong>Ingredientes:</strong></p>
+          <ul>
+            <li v-for="ingredient in dish.ingredients" :key="ingredient">{{ ingredient }}</li>
+          </ul>
+          <p><strong>Pasos de preparación:</strong></p>
+          <ol>
+            <li v-for="step in dish.preparationSteps" :key="step">{{ step }}</li>
+          </ol>
+        </template>
+        <template #footer>
+          <button @click="openEditDialog(dish)">Editar</button>
+          <button @click="deleteDish(dish.id)">Eliminar</button>
+        </template>
+      </pv-card>
+    </div>
     <dish-create-and-edit-dialog
-        :edit="isEdit"
-        :item="dish"
-        :visible="createAndEditDialogIsVisible"
-        v-on:cancel-requested="onCancelRequested"
-        v-on:save-requested="onSaveRequested($event)"
+        :item="selectedDish"
+        :visible="isDialogVisible"
+        @save-requested="saveDish"
+        @cancel-requested="isDialogVisible = false"
     />
   </div>
 </template>
 
+<script>
+import {ChefEntity} from "../../chefs/model/chef.entity.js";
+import {ChefService} from "../../chefs/services/chef.service.js";
+import { DishService } from "../services/dish.service.js";
+import { DishEntity } from "../model/dish.entity.js";
+import DishCreateAndEditDialog from "../components/dish-create-and-edit.component.vue";
+
+export default {
+  name: "dish-list",
+  components: { DishCreateAndEditDialog },
+  data() {
+    return {
+      dishes: [],
+      chefs: [],
+      searchQuery: "",
+      selectedDish: null,
+      isDialogVisible: false,
+      dishService: new DishService(),
+      chefService: new ChefService(),
+    };
+  },
+  computed: {
+    filteredDishes() {
+      const query = this.searchQuery.toLowerCase();
+      return this.dishes.filter(dish => {
+        return dish.nameOfDish.toLowerCase().includes(query) ||
+            dish.ingredients.some(ingredient => ingredient.toLowerCase().includes(query));
+      });
+    }
+  },
+  async created() {
+    await this.fetchDishes();
+    this.chefService.getAll()
+        .then(response => {
+          this.chefs = response.data.map((chef) => new ChefEntity(chef));
+          console.log(this.chefs);
+        }).catch(error => {
+      console.error("Error fetching Chefs:", error);
+    });
+  },
+  methods: {
+    getChefFromId(id) {
+      return this.chefs.find((chef) => chef.id === id);
+    },
+
+    async toggleFavorite(dish) {
+      dish.favorite = !dish.favorite;
+      try {
+        await this.dishService.update(dish.id, dish);
+        this.notifySuccessfulAction(`Dish ${dish.favorite ? 'added to favorites' : 'removed from favorites'}`);
+      } catch (error) {
+        console.error("Error updating favorite status:", error);
+      }
+    },
+    notifySuccessfulAction(message) {
+      this.$toast.add({severity: "success", summary: "Success", detail: message, life: 3000});
+    },
+    async fetchDishes() {
+      try {
+        const response = await this.dishService.getAll();
+        this.dishes = response.data.map(dish => new DishEntity(dish));
+      } catch (error) {
+        console.error("Error fetching dishes:", error);
+      }
+    },
+    openCreateDialog() {
+      this.selectedDish = {
+        nameOfDish: "",
+        ingredients: [],
+        preparationSteps: [],
+        id: 0,
+        chefId: 0,
+      };
+      this.isDialogVisible = true;
+    },
+    openEditDialog(dish) {
+      this.selectedDish = {...dish};
+      this.isDialogVisible = true;
+    },
+    async saveDish(dish) {
+      if (dish.id) {
+        await this.dishService.update(dish.id, dish);
+      } else {
+        dish.id = this.generateUniqueId();
+        await this.dishService.create(dish);
+      }
+      this.isDialogVisible = false;
+      this.fetchDishes();
+    },
+    generateUniqueId() {
+      return Math.floor(Math.random() * 100000);
+    },
+    async deleteDish(dishId) {
+      await this.dishService.delete(dishId);
+      this.fetchDishes();
+    },
+  }
+};
+</script>
+
 <style scoped>
-.template {
+.dish-container {
+  margin: 20px;
+}
+
+.dish-title {
+  text-align: center;
+  margin: 3rem 0 1.5rem;
+  font-size: 2rem;
+  color: lightgray;
+  padding-top: 30px
+}
+
+.search-bar {
+  display: block;
+  margin: 0 auto 2rem;
+  max-width: 400px;
+}
+
+.dish-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.dish-card {
+  padding: 20px;
+  width: 300px;
   position: relative;
-  top: 80px;
+}
+
+.favorite-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.favorite-button i {
+  font-size: 1.5rem;
+  color: lightgray;
+  transition: color 0.3s ease;
+}
+
+.favorite-button i.fas.fa-heart {
+  color: red;
+}
+
+.favorite-button i.far.fa-heart {
+  color: lightgray;
+}
+
+@media (max-width: 1200px) {
+  .dish-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .dish-grid {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

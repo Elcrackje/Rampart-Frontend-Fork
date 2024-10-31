@@ -1,115 +1,154 @@
 {
-  "tutorials": [],
-  "chefs": [
+  "userProfile": {
+    "id": 1,
+    "photo": "/src/assets/me.jpg",
+    "name": "Diego Rosado",
+    "email": "rosadoiporre@gmail.com",
+    "birthDate": "01/01/1990",
+    "address": "Calle 1 Urb. San Felipe 257",
+    "paymentMethod": "Tarjeta de Credito",
+    "cardNumber": "4772 **** **** 8898",
+    "yapeNumber": "",
+    "cashPayment": false,
+    "preferences": [
+      "Pescados y Mariscos",
+      "Comida China",
+      "Comida Internacional",
+      "Comida Saludable",
+      "Hamburguesas y Sandwiches"
+    ]
+  },
+  "posts": [
     {
       "id": 1,
-      "name": "Juanito Perez",
-      "rating": 3.3
-    },
-    {
-      "id": 2,
-      "name": "Lala Lopez",
-      "rating": 4.5
-    },
-    {
-      "id": 3,
-      "name": "Estefano Jaque",
-      "rating": 2
-    },
-    {
-      "id": 4,
-      "name": "Juan Torres",
-      "rating": 5
-    },
-    {
-      "id": 5,
-      "name": "Sebastián Real",
-      "rating": "2.5"
-    }
-  ],
-  "nutrients": [
-    {
-      "id": 1,
-      "name": "Ají de gallina",
-      "unit": "25% proteínas (44g), 13% carbohidratos (25.5g), y 64% grasas (53.2g)"
-    },
-    {
-      "id": 2,
-      "name": "Puré de papa",
-      "unit": "8% proteínas (2g), 82% carbohidratos (18g), y 10% grasas (2.2g)"
-    },
-    {
-      "id": 3,
-      "name": "Sopa de casa",
-      "unit": "10% proteínas (5g), 55% carbohidratos (27g), y 35% grasas (7g)"
-    },
-    {
-      "id": 4,
-      "name": "Sancochado de pollo",
-      "unit": "30% proteínas (25g), 40% carbohidratos (33g), y 30% grasas (12g)"
-    }
-  ],
-  "recipes":  [
-    {
-      "id": "2",
-      "name_of_dish": "Puré con milanesa",
-      "posted_by": "Maria Jose Pezo",
+      "chefId": 3,
+      "dishName": "Tallarines Rojos",
+      "image": "/src/assets/dishes/tallarines-rojos.jpg",
+      "stock": 20,
       "ingredients": [
-        "2 papas amarillas",
-        "1 taza de leche evaporada",
-        "50g de mantequilla",
-        "2 filetes de carne",
-        "1 huevo",
-        "Pan rallado",
-        "Aceite para freír",
-        "Sal y pimienta"
+        "Tallarines",
+        "Tomate",
+        "Cebolla",
+        "Ajo",
+        "Pimiento",
+        "Carne de res",
+        "Queso parmesano"
       ],
-      "preparation_steps": [
-        "Hierve las papas en agua con sal hasta que estén blandas, luego haz un puré añadiendo leche y mantequilla.",
-        "Sazona los filetes de carne con sal y pimienta.",
-        "Pasa los filetes por huevo batido y luego por pan rallado.",
-        "Fríe los filetes en abundante aceite caliente hasta que estén dorados y crujientes.",
-        "Sirve la milanesa acompañada del puré de papas."
-      ]
-    }
-  ],
-  "dishes": [
-    {
-      "id": 1,
-      "name_of_dish": "Tallarines rojos",
-      "description": "es un plato",
-      "average_price": 20.7,
-      "order_count": "201"
+      "paymentMethods": [
+        1,
+        3,
+        4
+      ],
+      "publishDate": "2024-10-30"
     },
     {
       "id": 2,
-      "name_of_dish": "Pure con milanesa",
-      "description": "es un plato",
-      "average_price": 19.5,
-      "order_count": 180
+      "chefId": 2,
+      "dishName": "Arroz con pollo",
+      "image": "/src/assets/dishes/arroz-con-pollo.jpg",
+      "stock": 16,
+      "ingredients": [
+        "Arroz",
+        "Choclo",
+        "Pollo",
+        "Culantro",
+        "Zanahoria",
+        "Arvejas",
+        "Cebolla",
+        "Ajo",
+        "Pimiento"
+      ],
+      "paymentMethods": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "publishDate": "2024-10-30"
     },
     {
       "id": 3,
-      "name_of_dish": "Arroz con pollo",
-      "description": "Es un plato",
-      "average_price": "13.50",
-      "order_count": "100"
+      "chefId": 2,
+      "dishName": "Papa a la Huancaina",
+      "image": "/src/assets/dishes/papa-a-la-huancaina.jpg",
+      "stock": 28,
+      "ingredients": [
+        "Papa",
+        "Ají amarillo",
+        "Queso fresco",
+        "Leche evaporada",
+        "Galletas saladas",
+        "Aceitunas",
+        "Huevo duro"
+      ],
+      "paymentMethods": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "publishDate": "2024-10-30"
+    },
+    {
+      "id": 4,
+      "chefId": 1,
+      "dishName": "Ceviche de Pescado",
+      "image": "/src/assets/dishes/ceviche-de-pescado.jpeg",
+      "stock": 16,
+      "ingredients": [
+        "Pescado",
+        "Cebolla",
+        "Limón",
+        "Ají limo",
+        "Culantro",
+        "Sal",
+        "Maíz cancha",
+        "Camote"
+      ],
+      "paymentMethods": [
+        1,
+        3,
+        4
+      ],
+      "publishDate": "2024-11-01"
+    }
+  ],
+  "payment-methods": [
+    {
+      "id": 1,
+      "name": "Efectivo",
+      "logo": "assets/payment-method-logos/efectivo-logo"
+    },
+    {
+      "id": 2,
+      "name": "Tarjeta",
+      "logo": "assets/payment-method-logos/tarjeta-logo"
+    },
+    {
+      "id": 3,
+      "name": "Yape",
+      "logo": "assets/payment-method-logos/yape-logo"
+    },
+    {
+      "id": 4,
+      "name": "Plin",
+      "logo": "assets/payment-method-logos/plin-logo"
     }
   ],
   "orders": [
     {
       "id": 1,
       "customerId": "1",
-      "orderDate": "2024-09-27",
+      "orderDate": "2024-09-23",
       "deliveryDate": "2024-09-28",
-      "paymentMethod": "Tarjeta de Crédito",
+      "paymentMethod": "Tarjeta de credito",
       "totalAmount": 45.5,
       "status": "pendiente"
     },
     {
       "id": 2,
       "customerId": "2",
-      "orderDate": "2024-09-26",
+      "orderDate": "2024-09-24",
       "deliveryDate": "2024-09-27",
       "paymentMethod": "Efectivo",
       "totalAmount": 23.75,
@@ -120,36 +159,159 @@
       "customerId": "3",
       "orderDate": "2024-09-25",
       "deliveryDate": "2024-09-26",
-      "paymentMethod": "PayPal",
+      "paymentMethod": "Monedero digital",
       "totalAmount": 30,
-      "status": "en preparación"
+      "status": "en preparacion"
+    }
+  ],
+  "chefs": [
+    {
+      "id": 1,
+      "name": "Juan Perez",
+      "rating": 3.3,
+      "favorite": true,
+      "imageUrl": "/src/assets/chef1.png"
+    },
+    {
+      "id": 2,
+      "name": "Lala Lopez",
+      "rating": 4.5,
+      "favorite": true,
+      "imageUrl": "/src/assets/chef2.png"
+    },
+    {
+      "id": 3,
+      "name": "Estefano Jaque",
+      "rating": 2,
+      "favorite": false,
+      "imageUrl": "/src/assets/chef3.png"
     },
     {
       "id": 4,
-      "customerId": "1",
-      "orderDate": "2024-09-24",
-      "deliveryDate": "2024-09-25",
-      "paymentMethod": "Transferencia Bancaria",
-      "totalAmount": 50,
-      "status": "pendiente"
+      "name": "Juan Torres",
+      "rating": 5,
+      "favorite": false,
+      "imageUrl": "/src/assets/chef4.png"
     },
     {
       "id": 5,
-      "customerId": "4",
-      "orderDate": "2024-09-23",
-      "deliveryDate": "2024-09-24",
-      "paymentMethod": "Tarjeta de Débito",
-      "totalAmount": 19.99,
-      "status": "completado"
+      "name": "Sebastián Real",
+      "rating": "1.5",
+      "favorite": false,
+      "imageUrl": "/src/assets/chef1.png"
+    }
+  ],
+  "dishes": [
+    {
+      "id": 1,
+      "chefId": 1,
+      "nameOfDish": "Puré con milanesa",
+      "ingredients": [
+        "2 papas amarillas",
+        "1 taza de leche evaporada",
+        "50g de mantequilla",
+        "2 filetes de carne",
+        "1 huevo",
+        "Pan rallado",
+        "Aceite para freír",
+        "Sal y pimienta"
+      ],
+      "preparationSteps": [
+        "Hierve las papas en agua con sal hasta que estén blandas, luego haz un puré añadiendo leche y mantequilla.",
+        "Sazona los filetes de carne con sal y pimienta.",
+        "Pasa los filetes por huevo batido y luego por pan rallado.",
+        "Fríe los filetes en abundante aceite caliente hasta que estén dorados y crujientes.",
+        "Sirve la milanesa acompañada del puré de papas."
+      ],
+      "favorite": false
     },
     {
-      "id": 6,
-      "customerId": "5",
-      "orderDate": "2024-09-22",
-      "deliveryDate": "2024-09-23",
-      "paymentMethod": "Efectivo",
-      "totalAmount": "50",
-      "status": "cancelado"
+      "id": 2,
+      "chefId": 2,
+      "nameOfDish": "Tacos al pastor",
+      "ingredients": [
+        "500g de carne de cerdo",
+        "1/2 piña",
+        "1 cebolla",
+        "Cilantro al gusto",
+        "Tortillas de maíz",
+        "Salsa al gusto",
+        "Sal y pimienta"
+      ],
+      "preparationSteps": [
+        "Marina la carne de cerdo con sal, pimienta y especias al gusto.",
+        "Cocina la carne en una parrilla hasta que esté dorada.",
+        "Corta la piña y la cebolla en trozos.",
+        "Arma los tacos con tortillas, carne, piña, cebolla y cilantro.",
+        "Agrega salsa al gusto y sirve."
+      ],
+      "favorite": true
+    },
+    {
+      "id": 3,
+      "chefId": 2,
+      "nameOfDish": "Spaghetti a la boloñesa",
+      "ingredients": [
+        "200g de spaghetti",
+        "150g de carne molida",
+        "1 lata de tomate triturado",
+        "1 cebolla",
+        "1 diente de ajo",
+        "Aceite de oliva",
+        "Sal y pimienta",
+        "Queso parmesano al gusto"
+      ],
+      "preparationSteps": [
+        "Cocina los spaghetti según las instrucciones del paquete.",
+        "En una sartén, calienta el aceite y sofríe la cebolla y el ajo picados.",
+        "Agrega la carne molida y cocina hasta que esté dorada.",
+        "Incorpora el tomate triturado, sal y pimienta, y deja cocinar a fuego lento.",
+        "Sirve los spaghetti con la salsa y espolvorea con queso parmesano."
+      ],
+      "favorite": true
+    },
+    {
+      "id": 4,
+      "chefId": 1,
+      "nameOfDish": "Pancakes de avena",
+      "ingredients": [
+        "1 taza de avena",
+        "1 plátano",
+        "1 huevo",
+        "1/2 taza de leche",
+        "1 cucharadita de polvo de hornear",
+        "Miel al gusto"
+      ],
+      "preparationSteps": [
+        "Licúa la avena, plátano, huevo y leche hasta obtener una mezcla homogénea.",
+        "Agrega el polvo de hornear y mezcla bien.",
+        "Calienta una sartén y vierte un poco de la mezcla formando pancakes.",
+        "Cocina por ambos lados hasta dorar.",
+        "Sirve con miel y frutas al gusto."
+      ],
+      "favorite": true
+    },
+    {
+      "id": 5,
+      "chefId": 3,
+      "nameOfDish": "Sopa de lentejas",
+      "ingredients": [
+        "1 taza de lentejas",
+        "1 zanahoria",
+        "1 cebolla",
+        "2 dientes de ajo",
+        "1 hoja de laurel",
+        "Agua o caldo de verduras",
+        "Sal y pimienta"
+      ],
+      "preparationSteps": [
+        "Lava las lentejas y ponlas a hervir en agua con la hoja de laurel.",
+        "En una sartén, sofríe la cebolla, ajo y zanahoria picados.",
+        "Agrega las verduras a las lentejas y cocina hasta que estén tiernas.",
+        "Sazona con sal y pimienta al gusto.",
+        "Sirve caliente."
+      ],
+      "favorite": false
     }
   ]
 }

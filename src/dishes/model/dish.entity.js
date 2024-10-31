@@ -1,10 +1,17 @@
 export class DishEntity {
-    constructor({id = 0, name_of_dish = '', description = '',average_price= 0,order_count = 0}) {
+    constructor({
+                    id = 0,
+                    chefId = 0,
+                    nameOfDish = '',
+                    ingredients = [],
+                    preparationSteps = [],
+                    favorite = false
+                }) {
         this.id = id;
-        this.name_of_dish = name_of_dish;
-        this.description = description;
-        this.average_price = average_price;
-        this.order_count = order_count;
-
+        this.chefId = chefId;
+        this.nameOfDish = nameOfDish;
+        this.ingredients = ingredients;
+        this.preparationSteps = preparationSteps;
+        this.favorite = favorite;
     }
 }

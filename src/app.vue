@@ -3,17 +3,20 @@ import LanguageSwitcher from "./public/components/language-switcher.component.vu
 
 export default {
   name: 'app',
-  components: { LanguageSwitcher },
-  title: 'SaboresCercanos',
+  components: {LanguageSwitcher},
+  title: 'TelaSecure',
   data() {
     return {
       drawer: false, // Puedes cambiar esto a false para que el drawer no aparezca
       items: [
-        { label: 'Cocineros', to: '/chefs' },
-        { label: 'Recetas', to: '/recipes' },
-        { label: 'Platos', to: '/dishes'},
-        { label: 'Nutrientes', to: '/nutrients' },
-        { label: 'Ordenes', to: '/orders' }
+        {label: 'Home', to: '/home'},
+        {label: 'Cocineros', to: '/chefs'},
+        {label: 'Publicaciones', to: '/posts'},
+        {label: 'Preposts', to: '/preposts'},
+        {label: 'Pedidos', to: '/orders'},
+        {label: 'Recetas', to: '/recipes'},
+        {label: 'Perfil', to: '/user-profile'},
+        {label: 'Favoritos', to: '/favorites'},
       ]
     }
   },
@@ -31,7 +34,7 @@ export default {
   <header>
     <pv-toolbar class="dark-toolbar full-width">
       <template #start>
-        <img src="/src/assets/Logo_Sabores_Cercano.png" alt="Logo" width="80px" />
+        <img src="/src/assets/Logo_Sabores_Cercano.png" alt="Logo" width="80px"/>
         <h3 class="title-color">Sabores Cercanos</h3>
       </template>
       <template #center>
@@ -40,9 +43,12 @@ export default {
                        :key="item.label"
                        v-slot="{ navigate, href }"
                        :to="item.to" custom>
-            <pv-button class="p-button-text no-border" :href="href" @click="navigate">{{item.label}}</pv-button>
+            <pv-button class="p-button-text no-border" :href="href" @click="navigate">{{ item.label }}</pv-button>
           </router-link>
         </div>
+      </template>
+      <template #end>
+        <language-switcher/>
       </template>
     </pv-toolbar>
   </header>
@@ -64,7 +70,7 @@ export default {
 
 /* Estilo para el toolbar */
 .dark-toolbar {
-  background-color: #f5deb3; /* Cambia el color de fondo a naranja */
+  background-color: darkorange; /* Cambia el color de fondo a naranja */
   color: white; /* Texto en color blanco */
   display: flex;
   align-items: center;
