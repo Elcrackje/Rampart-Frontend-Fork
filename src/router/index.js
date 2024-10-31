@@ -2,10 +2,13 @@ import {createRouter, createWebHistory} from "vue-router";
 import HomeComponent from "../public/pages/home.component.vue";
 import AboutComponent from "../public/pages/about.component.vue";
 import ChefListComponent from "../chefs/pages/chef-list.component.vue";
-import NutrientListComponent from "../nutrients/pages/nutrient-list.component.vue";
-import RecipeListComponent from "../../../../Webstorm-files/cocineros-bounded-context/src/recipes/pages/recipe-list.component.vue";
-import DishListComponent from "../../../../Webstorm-files/cocineros-bounded-context/src/dishes/pages/dish-list.component.vue";
-import OrderListComponent from "../../../../Webstorm-files/cocineros-bounded-context/src/orders/pages/order-list.component.vue";
+import OrderListComponent from "../orders/pages/order-list.component.vue";
+import PostListComponent from "../posting/pages/post-list.component.vue";
+import PrepostListComponent from "../preposting/pages/prepost-list.component.vue";
+import DishListComponent from "../dishes/pages/dish-list.component.vue";
+import UserProfileComponent from "../profile/pages/profile-page.component.vue";
+import FavoritePageComponent from "../favorites/pages/favorite-page.component.vue";
+import PageNotFoundComponent from "../public/pages/page-not-found.component.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -14,18 +17,21 @@ const router = createRouter({
         { path: '/about',                   name: 'about',      component: AboutComponent,              meta: { title: 'About us'} },
         { path: '/chefs',   name: 'chefs', component: ChefListComponent, meta: { title: 'Chefs'}},
         { path: '/orders',   name: 'orders', component: OrderListComponent, meta: { title: 'Orders'}},
-        { path: '/recipes',   name: 'recipes', component: RecipeListComponent, meta: { title: 'Recipes'}},
-        { path: '/dishes',   name: 'dishes', component: DishListComponent, meta: { title: 'Dishes'}},
-        { path: '/nutrients',   name: 'nutrients', component: NutrientListComponent, meta: { title: 'Nutrients'}},
-        { path: '/',                        redirect: '/home' }
+        { path: "/posts", name: 'posts', component: PostListComponent, meta: { title: 'Posts'}},
+        { path: "/preposts", name: 'preposts', component: PrepostListComponent, meta: { title: 'Posts'}},
+        { path: '/user-profile',            name: 'userProfile', component: UserProfileComponent, meta: { title: 'User Profile'} }, // Nueva ruta
+        { path: '/',                        redirect: '/home' },
+        { path: '/recipes',   name: 'recipes', component: DishListComponent, meta: { title: 'Recipes'}},
+        { path: '/favorites',   name: 'favorites', component: FavoritePageComponent, meta: { title: 'Favoritos'}},
+        {path: '/:pathMatch(.*)*', component: PageNotFoundComponent},
     ]
 });
 
 router.beforeEach((to,
                    from,
                    next) => {
-   let baseTitle = 'ACME Learning Center';
-   document.title = `${baseTitle} | ${to.meta['title']}`;
-   next();
+    let baseTitle = 'ACME Learning Center';
+    document.title = `${baseTitle} | ${to.meta['title']}`;
+    next();
 });
 export default router;
