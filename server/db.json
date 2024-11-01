@@ -6,7 +6,7 @@
     "email": "rosadoiporre@gmail.com",
     "birthDate": "01/01/1990",
     "address": "Calle 1 Urb. San Felipe 257",
-    "paymentMethod": "Tarjeta de Credito",
+    "paymentMethod": "Yape",
     "cardNumber": "4772 **** **** 8898",
     "yapeNumber": "",
     "cashPayment": false,
@@ -15,7 +15,9 @@
       "Comida China",
       "Comida Internacional",
       "Comida Saludable",
-      "Hamburguesas y Sandwiches"
+      "Hamburguesas y Sandwiches",
+      "Sushi",
+      "Pollos y Parrillas"
     ]
   },
   "posts": [

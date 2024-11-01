@@ -34,6 +34,7 @@ import i18n from "./i18n.js";
 import router from "./router/index.js";
 import SelectButton from "primevue/selectbutton";
 import Image from "primevue/image";
+import Datepicker from "primevue/datepicker";
 
 
 const app = createApp(App);
@@ -67,7 +68,9 @@ app.component('pv-button', Button)
     .component('pv-textarea', Textarea)
     .component('pv-toolbar', Toolbar)
     .component('pv-toast', Toast)
-    .component('pv-image', Image);
+    .component('pv-image', Image)
+    .component('pv-date-picker', Datepicker)
+
 
 app.use(i18n);
 

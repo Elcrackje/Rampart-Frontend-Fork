@@ -1,4 +1,4 @@
-import http from "../../../../../../../Downloads/BOUNDED CONTEXT DIEGO PERFIL HOME/cocineros-bounded-context - Copy/src/shared/services/http-common.js";
+import http from "../../shared/services/http-common.js";
 
 export class UserProfileService {
     resourceEndpoint = '/userProfile';

@@ -1,4 +1,4 @@
-import http from "../../../../FrontEnd/src/shared/services/http-common.js";
+import http from "../../shared/services/http-common.js";
 
 export class OrderService {
     resourceEndpoint = '/orders';

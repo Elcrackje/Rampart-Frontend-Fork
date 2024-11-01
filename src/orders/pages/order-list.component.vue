@@ -2,7 +2,7 @@
 import OrderCreateAndEditDialog from "../components/order-create-and-edit.component.vue";
 import { OrderEntity } from "../model/order.entity.js";
 import { OrderService } from "../services/order.service.js";
-import DataManager from "../../../../FrontEnd/src/shared/components/data-manager.component.vue";
+import DataManager from "../../shared/components/data-manager.component.vue";
 import OrderFilter from "../components/order-filter.component.vue";
 
 export default {

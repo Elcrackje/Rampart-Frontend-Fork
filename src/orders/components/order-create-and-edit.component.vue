@@ -1,5 +1,5 @@
 <script>
-import CreateAndEdit from "../../../../FrontEnd/src/shared/components/create-and-edit.component.vue";
+import CreateAndEdit from "../../shared/components/create-and-edit.component.vue";
 
 export default {
   name: "order-create-and-edit-dialog",
