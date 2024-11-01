@@ -2,12 +2,11 @@
 import { ChefEntity } from "../model/chef.entity.js";
 import DataManager from "../../shared/components/data-manager.component.vue";
 import { ChefService } from "../services/chef.service.js";
-import CategoryCreateAndEditDialog from "../../publishing/components/category-create-and-edit.component.vue";
 import ChefCreateAndEditDialog from "../components/chef-create-and-edit.component.vue";
 
 export default {
   name: "chef-list.component",
-  components: { ChefCreateAndEditDialog, CategoryCreateAndEditDialog, DataManager },
+  components: { ChefCreateAndEditDialog, DataManager },
   data() {
     return {
       title: { singular: "Chef", plural: "Chefs" },
