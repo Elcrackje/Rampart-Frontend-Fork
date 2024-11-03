@@ -4,6 +4,7 @@ import {ChefEntity} from "../../chefs/model/chef.entity.js";
 import {OrderEntity} from "../../orders/model/order.entity.js";
 import {OrderService} from "../../orders/services/order.service.js";
 import {DishEntity} from "../../dishes/model/dish.entity.js";
+import {PostService} from "../services/posts.service.js";
 
 export default {
   name: "post-display",
@@ -11,7 +12,8 @@ export default {
   props: {
     postProp: PostEntity,
     chefProp: ChefEntity,
-    dishProp: DishEntity
+    dishProp: DishEntity,
+    serviceProp: PostService
   },
   created() {
     console.log("Post Prop:", this.postProp);
@@ -81,6 +83,16 @@ export default {
             console.error("Error creando la orden:", error);
           });
     },
+    deletePost() {
+      this.serviceProp.delete(this.postProp.id)
+          .then(() => {
+            this.$emit("postsUpdated")
+            alert("Publicación borrada exitosamente")
+          })
+          .catch(error => {
+            console.error("No se pudo borrar la publicación:", error);
+          })
+    }
   }
 }
 </script>
@@ -104,7 +116,8 @@ export default {
               <!img :src="dishProp.image" :alt="dishProp.nameOfDish" width="100%" height="45%">
               <p>Stock: {{this.postProp.stock}}</p>
               <pv-button label="Ver Ingredientes" icon="pi pi-eye" @click="ingredientListVisible = true" severity="info"></pv-button><br>
-              <pv-button style="margin-top: 0.5rem" label="Hacer Pedido" icon="pi pi-plus-circle" @click="openOrderDialog" severity="warn"></pv-button>
+              <pv-button style="margin-top: 0.5rem" label="Hacer Pedido" icon="pi pi-plus-circle" @click="openOrderDialog" severity="warn"></pv-button><br>
+              <pv-button style="margin-top: 0.5rem" icon="pi pi-trash" @click="deletePost" severity="danger"></pv-button>
             </template>
           </pv-card>
         </div>

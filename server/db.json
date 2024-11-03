@@ -23,96 +23,33 @@
   "posts": [
     {
       "id": 1,
-      "chefId": 3,
-      "dishName": "Tallarines Rojos",
-      "image": "/src/assets/dishes/tallarines-rojos.jpg",
-      "stock": 20,
-      "ingredients": [
-        "Tallarines",
-        "Tomate",
-        "Cebolla",
-        "Ajo",
-        "Pimiento",
-        "Carne de res",
-        "Queso parmesano"
-      ],
-      "paymentMethods": [
-        1,
-        3,
-        4
-      ],
-      "publishDate": "2024-10-30"
+      "dishId": 1,
+      "publishDate": "2024-11-31",
+      "stock": 20
     },
     {
       "id": 2,
-      "chefId": 2,
-      "dishName": "Arroz con pollo",
-      "image": "/src/assets/dishes/arroz-con-pollo.jpg",
-      "stock": 16,
-      "ingredients": [
-        "Arroz",
-        "Choclo",
-        "Pollo",
-        "Culantro",
-        "Zanahoria",
-        "Arvejas",
-        "Cebolla",
-        "Ajo",
-        "Pimiento"
-      ],
-      "paymentMethods": [
-        1,
-        2,
-        3,
-        4
-      ],
-      "publishDate": "2024-10-30"
+      "dishId": 3,
+      "publishDate": "2024-11-30",
+      "stock": 22
     },
     {
       "id": 3,
-      "chefId": 2,
-      "dishName": "Papa a la Huancaina",
-      "image": "/src/assets/dishes/papa-a-la-huancaina.jpg",
-      "stock": 28,
-      "ingredients": [
-        "Papa",
-        "Ají amarillo",
-        "Queso fresco",
-        "Leche evaporada",
-        "Galletas saladas",
-        "Aceitunas",
-        "Huevo duro"
-      ],
-      "paymentMethods": [
-        1,
-        2,
-        3,
-        4
-      ],
-      "publishDate": "2024-10-30"
+      "dishId": 2,
+      "publishDate": "2024-11-30",
+      "stock": 12
     },
     {
       "id": 4,
-      "chefId": 1,
-      "dishName": "Ceviche de Pescado",
-      "image": "/src/assets/dishes/ceviche-de-pescado.jpeg",
-      "stock": 16,
-      "ingredients": [
-        "Pescado",
-        "Cebolla",
-        "Limón",
-        "Ají limo",
-        "Culantro",
-        "Sal",
-        "Maíz cancha",
-        "Camote"
-      ],
-      "paymentMethods": [
-        1,
-        3,
-        4
-      ],
-      "publishDate": "2024-11-01"
+      "dishId": 5,
+      "publishDate": "2024-11-30",
+      "stock": 15
+    },
+    {
+      "id": 5,
+      "dishId": 4,
+      "publishDate": "2024-11-31",
+      "stock": 45
     }
   ],
   "payment-methods": [

@@ -6,10 +6,11 @@ import PostDisplay from "../components/post-display.component.vue";
 import {ChefService} from "../../chefs/services/chef.service.js";
 import {DishService} from "../../dishes/services/dish.service.js";
 import {DishEntity} from "../../dishes/model/dish.entity.js";
+import CreatePostButton from "../components/create-post-button.component.vue";
 
 export default {
   name: "post-list",
-  components: {PostDisplay},
+  components: {CreatePostButton, PostDisplay},
   data() {
     return {
       posts: [],
@@ -83,30 +84,45 @@ export default {
       });
     },
 
-    filterTodayPosts(){
+    filterTodayPosts() {
       this.posts = this.posts.filter((post) => {
         const today = new Date();
         today.setDate(today.getDate())
-        const postDate = new Date(post.publishDate + 'T00:00:00' );
+        const postDate = new Date(post.publishDate + 'T00:00:00');
         return (
             postDate.getDate() === today.getDate() &&
             postDate.getMonth() === today.getMonth() &&
             postDate.getFullYear() === today.getFullYear()
         );
       })
-    }
+    },
 
+    reloadPosts() {
+      Promise.all([
+        this.postService.getAll()
+            .then(response => {
+              this.posts = response.data.map((post) => new PostEntity(post));
+              console.log("Posts loaded:", this.posts); // Check if posts are loaded
+            }).catch(error => {
+          console.error("Error fetching Posts:", error);
+        })
+      ]).then(() => {
+        this.filterTodayPosts();
+        this.sortPostsByChefRating();
+      });
+    }
   }
 }
 </script>
 
 <template>
   <h2 style="text-align:center; margin-top: 5rem">Publicaciones del día</h2>
+  <create-post-button @postsUpdated="reloadPosts" style="margin-bottom: 1rem"></create-post-button><br>
   <pv-input-text v-model="searchQuery" placeholder="Buscar por plato, ingredientes o chef"></pv-input-text>
 
   <div class="post-grid" v-if="filteredPosts.length > 0">
     <div v-for="post in filteredPosts" :key="post.id">
-      <post-display :postProp="post" :chefProp="getChefFromId(getDishFromId(post.dishId).chefId)" :dishProp="getDishFromId(post.dishId)"></post-display>
+      <post-display @postsUpdated="reloadPosts" :serviceProp="this.postService" :postProp="post" :chefProp="getChefFromId(getDishFromId(post.dishId).chefId)" :dishProp="getDishFromId(post.dishId)"></post-display>
     </div>
   </div>
   <div v-else>
