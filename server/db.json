@@ -49,20 +49,7 @@
       "dishId": 4,
       "publishDate": "2024-11-31",
       "stock": 45
-    },
-    {
-      "id": 6,
-      "dishId": 1,
-      "stock": 2,
-      "publishDate": "2024-11-05"
-    },
-    {
-      "id": 8,
-      "dishId": 1,
-      "stock": 15,
-      "publishDate": "2024-11-05"
     }
-
   ],
   "payment-methods": [
     {
