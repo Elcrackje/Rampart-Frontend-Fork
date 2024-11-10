@@ -62,7 +62,7 @@
       "stock": 15,
       "publishDate": "2024-11-05"
     }
-    {
+
   ],
   "payment-methods": [
     {
@@ -80,7 +80,7 @@
       "name": "Yape",
       "logo": "assets/payment-method-logos/yape-logo"
 
-    },
+    }
   ],
   "orders": [
     {
