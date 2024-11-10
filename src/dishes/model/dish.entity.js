@@ -5,7 +5,8 @@ export class DishEntity {
                     nameOfDish = '',
                     ingredients = [],
                     preparationSteps = [],
-                    favorite = false
+                    favorite = false,
+                    price="",
                 }) {
         this.id = id;
         this.chefId = chefId;
@@ -13,5 +14,6 @@ export class DishEntity {
         this.ingredients = ingredients;
         this.preparationSteps = preparationSteps;
         this.favorite = favorite;
+        this.price = price;
     }
 }

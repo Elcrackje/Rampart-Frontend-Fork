@@ -1,5 +1,5 @@
 <template>
- <div>
+  <div>
     <h1 class="section-title">Chefs Favoritos</h1>
     <div class="grid-container">
       <div v-for="chef in chefs" :key="chef.id" class="card-item">

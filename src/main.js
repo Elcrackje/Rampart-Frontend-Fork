@@ -35,7 +35,7 @@ import router from "./router/index.js";
 import SelectButton from "primevue/selectbutton";
 import Image from "primevue/image";
 import Datepicker from "primevue/datepicker";
-
+import '@fortawesome/fontawesome-free/css/all.css';
 
 const app = createApp(App);
 

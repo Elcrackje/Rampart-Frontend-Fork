@@ -1,22 +1,16 @@
 export class OrderEntity {
-    constructor({id= "",customerId= "",orderDate= "",deliveryDate= "",paymentMethod= "",totalAmount= 0.0,status= "", dishes = []}) {
+    constructor({id= "",customerId= "",orderDate= "",deliveryDate= "",deliveryTime= "",paymentMethod= "",totalAmount= 0.0,status= "", dishes = 0}) {
         this.id = id;
         this.customerId = customerId;
         this.orderDate = orderDate;
         this.deliveryDate = deliveryDate;
+        this.deliveryTime = deliveryTime; // Agregamos el campo deliveryTime para almacenar la hora de entrega
         this.paymentMethod = paymentMethod;
-        this.totalAmount = this.calculateTotalAmount(dishes);
+        this.totalAmount = totalAmount;
         this.status = status;
-        this.dishes = dishes; // Agregamos el campo dishes para almacenar los platillos seleccionados
+        this.dishes = dishes;
         this.detailsShown = false;
     }
-    calculateTotalAmount(dishes) {
-        if (Array.isArray(dishes)) {
-            return dishes.reduce((total, dish) => {
-                return total + (dish.price * dish.quantity);
-            }, 0);
-        }
-        return 0; // Retorna 0 si dishes no es un arreglo
-    }
+
 
 }
