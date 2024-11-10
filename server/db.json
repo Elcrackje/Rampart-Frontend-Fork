@@ -33,6 +33,23 @@
       "publishDate": "2024-11-30",
       "stock": 22
     },
+    { "id": 3,
+      "dishId": 2,
+      "publishDate": "2024-11-30",
+      "stock": 12
+    },
+    {
+      "id": 4,
+      "dishId": 5,
+      "publishDate": "2024-11-30",
+      "stock": 15
+    },
+    {
+      "id": 5,
+      "dishId": 4,
+      "publishDate": "2024-11-31",
+      "stock": 45
+    },
     {
       "id": 6,
       "dishId": 1,
@@ -45,6 +62,25 @@
       "stock": 15,
       "publishDate": "2024-11-05"
     }
+    {
+  ],
+  "payment-methods": [
+    {
+      "id": 1,
+      "name": "Efectivo",
+      "logo": "assets/payment-method-logos/efectivo-logo"
+    },
+    {
+      "id": 2,
+      "name": "Tarjeta",
+      "logo": "assets/payment-method-logos/tarjeta-logo"
+    },
+    {
+      "id": 3,
+      "name": "Yape",
+      "logo": "assets/payment-method-logos/yape-logo"
+
+    },
   ],
   "orders": [
     {
