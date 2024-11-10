@@ -13,7 +13,6 @@ export default {
       endDate: "",
 
       statuses: ["pendiente", "completado", "en preparacion"], // Ajusta según tus estados
-      paymentMethods: ["Tarjeta de credito", "Efectivo", "Monedero digital"], // Ajusta según tus métodos de pago
     };
   },
   methods: {
@@ -44,11 +43,7 @@ export default {
       <option v-for="status in statuses" :key="status" :value="status">{{ status }}</option>
     </select>
 
-    <label for="paymentMethod">{{$t("paymentMethod")}}:</label>
-    <select v-model="selectedPaymentMethod" @change="applyFilters">
-      <option value="">All</option>
-      <option v-for="method in paymentMethods" :key="method" :value="method">{{ method }}</option>
-    </select>
+
 
     <!-- Campos para filtrar por fecha de order -->
     <label for="startDate">{{$t("from")}}:</label>

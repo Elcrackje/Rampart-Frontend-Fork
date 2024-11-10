@@ -4,6 +4,8 @@ import { OrderEntity } from "../model/order.entity.js";
 import { OrderService } from "../services/order.service.js";
 import DataManager from "../../shared/components/data-manager.component.vue";
 import OrderFilter from "../components/order-filter.component.vue";
+import {DishEntity} from "../../dishes/model/dish.entity.js";
+import {DishService} from "../../dishes/services/dish.service.js";
 
 export default {
   name: "order-list.component",
@@ -13,20 +15,28 @@ export default {
       title: { singular: "Order", plural: "Orders" },
       orders: [],
       order: new OrderEntity({}),
+      dishes:[],
+      dish: new DishEntity({}),
       selectedOrders: [],
       orderService: new OrderService(),
+      dishService:new DishService(),
       createAndEditDialogIsVisible: false,
       isEdit: false,
       submitted: false,
       filteredOrders: [], // Nueva propiedad para almacenar las órdenes filtradas
       filters: {
-        status: "",
-        paymentMethod: "",
+        status: ""
       },
     };
   },
   methods: {
 
+    findDishById(dishId) {
+      console.log("Buscando platillo con ID:", dishId); // Verifica el ID que estamos buscando
+      const dish = this.dishes.find(dish => dish.id === dishId);
+      console.log("Platillo encontrado:", dish); // Verifica si el platillo se encuentra
+      return dish;
+    },
     //boton
     toggleDetails(order) {
       order.detailsShown = !order.detailsShown; // Cambia el estado solo de la orden específica
@@ -43,7 +53,6 @@ export default {
     applyFilters() {
       this.filteredOrders = this.orders.filter(order => {
         const matchesStatus = this.filters.status ? order.status === this.filters.status : true;
-        const matchesPaymentMethod = this.filters.paymentMethod ? order.paymentMethod === this.filters.paymentMethod : true;
         const matchesOrderId = this.filters.orderId ? order.id.toString() === this.filters.orderId : true;
 
         // Convertir las fechas a objetos Date para comparación
@@ -52,7 +61,7 @@ export default {
         const endDate = this.filters.endDate ? new Date(this.filters.endDate) : null;
         const matchesDateRange = (!startDate || orderDate >= startDate) && (!endDate || orderDate <= endDate);
 
-        return matchesStatus && matchesPaymentMethod && matchesOrderId && matchesDateRange;
+        return matchesStatus  && matchesOrderId && matchesDateRange;
       });
     },
 
@@ -138,11 +147,19 @@ export default {
       this.orders = response.data.map((order) => {
         return new OrderEntity(order);
       });
+
+      const dishResponse = await this.dishService.getAll();
+      this.dishes = dishResponse.data.map((dish) => {
+        return new DishEntity(dish);
+      });
+
       this.filteredOrders = this.orders; // Inicializa la lista filtrada
+
     } catch (error) {
       console.error("F Error fetching Orders:", error);
     }
   }
+
 
 
 }
@@ -151,15 +168,17 @@ export default {
 <template>
   <div class="title">
     <h3>Orders</h3>
-
     <div class="main-container">
       <!-- Filtros de búsqueda -->
+
       <div class="filter-container">
-        <h4>{{$t("filters")}}</h4> <!-- Título para los filtros -->
+        <h4>{{$t("filters")}}</h4>
         <order-filter @filter-changed="onFilterChanged" />
+        <!--
         <pv-button @click="onNewItem" class="p-button-rounded p-button-success mb-4">
           {{$t("newOrder")}}
         </pv-button>
+        -->
       </div>
 
       <!-- Distribuir órdenes en tres columnas según el estado -->
@@ -173,33 +192,51 @@ export default {
                 <h2>{{$t("order")}} : #{{ order.id }}</h2>
               </template>
               <template #content>
-                <p><strong>{{$t("customerId")}}:</strong> {{ order.customerId }}</p>
-                <p><strong>{{$t("orderDate")}}:</strong> {{ order.orderDate }}</p>
-                <p><strong>{{$t("deliveryDate")}}:</strong> {{ order.deliveryDate }}</p>
-                <p><strong>{{$t("paymentMethod")}}:</strong> {{ order.paymentMethod }}</p>
-                <p><strong>{{$t("totalAmount")}}:</strong> {{ order.totalAmount }}</p>
-                <p><strong>{{$t("status")}}:</strong> {{ order.status }}</p>
-                <p><strong>dishes:</strong></p>
+                <p><strong>ClienteId:</strong> {{ order.customerId }}</p>
+                <p><strong>Fecha de la orden:</strong> {{ order.orderDate }}</p>
+                <p><strong>Fecha de entrega:</strong> {{ order.deliveryDate }}</p>
+                <p><strong>Hora de entrega:</strong> {{ order.deliveryTime }}</p>
+                <p><strong>Metodo de pago:</strong> {{ order.paymentMethod }}</p>
+
+                <p><strong>Estado:</strong> {{ order.status }}</p>
+                <!--
+                <p><strong>Platillos:</strong></p>
+
                 <div>
                   <button @click="toggleDetails(order)">
                     {{ order.detailsShown ? 'Hide' : 'Show' }} All Dishes Details
                   </button>
                   <ul v-if="order.detailsShown" style="">
-                    <li v-for="dish in order.dishes" :key="dish.id">
-                      <p>Dish Name: {{ dish.name }}</p>
-                      <p>Quantity: {{ dish.quantity }}</p>
-                      <p>Price: {{ dish.price }}</p>
-                      <img :src="dish.imageUrl" alt="Dish Image" />
-                    </li>
+                    <template v-if="findDishById(order.dishes)">
+                      <li>
+                        <p><strong>Nombre del platillo:</strong> {{ findDishById(order.dishes).nameOfDish }}</p>
+                        <p><strong>ChefId:</strong> {{ findDishById(order.dishes).chefId }}</p>
+                        <p><strong>Precio:</strong> ${{ findDishById(order.dishes).price }}</p>
+                        <p><strong>Ingredientes:</strong></p>
+                        <ul>
+                          <li v-for="ingredient in findDishById(order.dishes).ingredients" :key="ingredient">
+                            {{ ingredient }}
+                          </li>
+                        </ul>
+                        <p><strong>Pasos de preparación:</strong></p>
+                        <ul>
+                          <li v-for="step in findDishById(order.dishes).preparationSteps" :key="step">
+                            {{ step }}
+                          </li>
+                        </ul>
+                      </li>
+                    </template>
                   </ul>
                 </div>
+                -->
+
               </template>
               <template #footer>
                 <pv-button @click="onEditItem(order)" class="p-button-rounded p-button-info">
-                  {{$t("edit")}}
+                  {{$t("edit order")}}
                 </pv-button>
                 <pv-button @click="onDeleteItem(order)" class="p-button-rounded p-button-danger">
-                  {{$t("delete")}}
+                  {{$t("cancel order")}}
                 </pv-button>
               </template>
             </pv-card>
@@ -215,32 +252,49 @@ export default {
                 <h2>{{$t("order")}} : #{{ order.id }}</h2>
               </template>
               <template #content>
-                <p><strong>{{$t("customerId")}}:</strong> {{ order.customerId }}</p>
-                <p><strong>{{$t("orderDate")}}:</strong> {{ order.orderDate }}</p>
-                <p><strong>{{$t("deliveryDate")}}:</strong> {{ order.deliveryDate }}</p>
-                <p><strong>{{$t("paymentMethod")}}:</strong> {{ order.paymentMethod }}</p>
-                <p><strong>{{$t("totalAmount")}}:</strong> {{ order.totalAmount }}</p>
-                <p><strong>{{$t("status")}}:</strong> {{ order.status }}</p>
+                <p><strong>ClienteId:</strong> {{ order.customerId }}</p>
+                <p><strong>Fecha de la orden:</strong> {{ order.orderDate }}</p>
+                <p><strong>Fecha de entrega:</strong> {{ order.deliveryDate }}</p>
+                <p><strong>Hora de entrega:</strong> {{ order.deliveryTime }}</p>
+                <p><strong>Metodo de pago:</strong> {{ order.paymentMethod }}</p>
+
+                <p><strong>Estado:</strong> {{ order.status }}</p>
+                <!--
+                <p><strong>Platillos:</strong></p>
                 <div>
                   <button @click="toggleDetails(order)">
                     {{ order.detailsShown ? 'Hide' : 'Show' }} All Dishes Details
                   </button>
                   <ul v-if="order.detailsShown">
-                    <li v-for="dish in order.dishes" :key="dish.id">
-                      <p>Dish Name: {{ dish.name }}</p>
-                      <p>Quantity: {{ dish.quantity }}</p>
-                      <p>Price: {{ dish.price }}</p>
-                      <img :src="dish.imageUrl" alt="Dish Image" />
-                    </li>
+                    <template v-if="findDishById(order.dishes)">
+                      <li>
+                        <p><strong>Nombre del platillo:</strong> {{ findDishById(order.dishes).nameOfDish }}</p>
+                        <p><strong>ChefId:</strong> {{ findDishById(order.dishes).chefId }}</p>
+                        <p><strong>Precio:</strong> ${{ findDishById(order.dishes).price }}</p>
+                        <p><strong>Ingredientes:</strong></p>
+                        <ul>
+                          <li v-for="ingredient in findDishById(order.dishes).ingredients" :key="ingredient">
+                            {{ ingredient }}
+                          </li>
+                        </ul>
+                        <p><strong>Pasos de preparación:</strong></p>
+                        <ul>
+                          <li v-for="step in findDishById(order.dishes).preparationSteps" :key="step">
+                            {{ step }}
+                          </li>
+                        </ul>
+                      </li>
+                    </template>
                   </ul>
                 </div>
+                -->
               </template>
               <template #footer>
                 <pv-button @click="onEditItem(order)" class="p-button-rounded p-button-info">
-                  {{$t("edit")}}
+                  {{$t("edit order")}}
                 </pv-button>
                 <pv-button @click="onDeleteItem(order)" class="p-button-rounded p-button-danger">
-                  {{$t("delete")}}
+                  {{$t("cancel order")}}
                 </pv-button>
               </template>
             </pv-card>
@@ -256,33 +310,50 @@ export default {
                 <h2>{{$t("order")}} : #{{ order.id }}</h2>
               </template>
               <template #content>
-                <p><strong>{{$t("customerId")}}:</strong> {{ order.customerId }}</p>
-                <p><strong>{{$t("orderDate")}}:</strong> {{ order.orderDate }}</p>
-                <p><strong>{{$t("deliveryDate")}}:</strong> {{ order.deliveryDate }}</p>
-                <p><strong>{{$t("paymentMethod")}}:</strong> {{ order.paymentMethod }}</p>
-                <p><strong>{{$t("totalAmount")}}:</strong> {{ order.totalAmount }}</p>
-                <p><strong>{{$t("status")}}:</strong> {{ order.status }}</p>
+                <p><strong>ClienteId:</strong> {{ order.customerId }}</p>
+                <p><strong>Fecha de la orden:</strong> {{ order.orderDate }}</p>
+                <p><strong>Fecha de entrega:</strong> {{ order.deliveryDate }}</p>
+                <p><strong>Hora de entrega:</strong> {{ order.deliveryTime }}</p>
+                <p><strong>Metodo de pago:</strong> {{ order.paymentMethod }}</p>
+
+                <p><strong>Estado:</strong> {{ order.status }}</p>
+                <!--
+                <p><strong>Platillos:</strong></p>
 
                 <div>
                   <button @click="toggleDetails(order)">
                     {{ order.detailsShown ? 'Hide' : 'Show' }} All Dishes Details
                   </button>
                   <ul v-if="order.detailsShown">
-                    <li v-for="dish in order.dishes" :key="dish.id">
-                      <p>Dish Name: {{ dish.name }}</p>
-                      <p>Quantity: {{ dish.quantity }}</p>
-                      <p>Price: {{ dish.price }}</p>
-                      <img :src="dish.imageUrl" alt="Dish Image" />
-                    </li>
+                    <template v-if="findDishById(order.dishes)">
+                      <li>
+                        <p><strong>Nombre del platillo:</strong> {{ findDishById(order.dishes).nameOfDish }}</p>
+                        <p><strong>ChefId:</strong> {{ findDishById(order.dishes).chefId }}</p>
+                        <p><strong>Precio:</strong> ${{ findDishById(order.dishes).price }}</p>
+                        <p><strong>Ingredientes:</strong></p>
+                        <ul>
+                          <li v-for="ingredient in findDishById(order.dishes).ingredients" :key="ingredient">
+                            {{ ingredient }}
+                          </li>
+                        </ul>
+                        <p><strong>Pasos de preparación:</strong></p>
+                        <ul>
+                          <li v-for="step in findDishById(order.dishes).preparationSteps" :key="step">
+                            {{ step }}
+                          </li>
+                        </ul>
+                      </li>
+                    </template>
                   </ul>
                 </div>
+                -->
               </template>
               <template #footer>
                 <pv-button @click="onEditItem(order)" class="p-button-rounded p-button-info">
-                  {{$t("edit")}}
+                  {{$t("edit order")}}
                 </pv-button>
                 <pv-button @click="onDeleteItem(order)" class="p-button-rounded p-button-danger">
-                  {{$t("delete")}}
+                  {{$t("cancel order")}}
                 </pv-button>
               </template>
             </pv-card>
@@ -290,6 +361,7 @@ export default {
         </div>
       </div>
     </div>
+
 
     <!-- Dialog para editar/crear una orden -->
     <order-create-and-edit-dialog

@@ -76,32 +76,43 @@ export default {
 
         <div class="field mt-5">
           <pv-float-label>
-            <label for="name">CustomerId</label>
+            <label for="name">ClienteId</label>
             <pv-input-text id="customerId" v-model="item.customerId"
                            :class="{'p-invalid': submitted && !item.customerId }"/>
           </pv-float-label>
         </div>
         <div class="field mt-5">
           <pv-float-label>
-            <label for="name">OrderDate</label>
+            <label for="name">Fecha de la orden</label>
             <pv-input-text id="orderDate" v-model="item.orderDate"
                            :class="{'p-invalid': submitted && !item.orderDate }"/>
           </pv-float-label>
         </div>
         <div class="field mt-5">
           <pv-float-label>
-            <label for="name">DeliveryDate</label>
+            <label for="name">Fecha de entrega</label>
             <pv-input-text id="deliveryDate" v-model="item.deliveryDate"
                            :class="{'p-invalid': submitted && !item.deliveryDate }"/>
           </pv-float-label>
         </div>
+
         <div class="field mt-5">
           <pv-float-label>
-            <label for="name">PaymentMethod</label>
+            <label for="name">Hora de entrega</label>
+            <pv-input-text id="deliveryTime" v-model="item.deliveryTime"
+                           :class="{'p-invalid': submitted && !item.deliveryTime }"/>
+          </pv-float-label>
+        </div>
+
+        <div class="field mt-5">
+          <pv-float-label>
+            <label for="name">Metodo de pago</label>
             <pv-input-text id="paymentMethod" v-model="item.paymentMethod"
                            :class="{'p-invalid': submitted && !item.paymentMethod }"/>
           </pv-float-label>
         </div>
+
+
 
         <div class="field mt-5">
           <pv-float-label>
@@ -110,18 +121,18 @@ export default {
                            :class="{'p-invalid': submitted && !item.status }"/>
           </pv-float-label>
         </div>
-        <!-- Campo para seleccionar platillos y cantidad -->
+        <!-- Campo para seleccionar platillos y cantidad
         <div class="field mt-5">
           <label>Dishes</label>
           <div v-for="(option, index) in dishOptions" :key="index" class="dish-option">
             <pv-checkbox :value="option.value" v-model="item.dishes" :label="option.label" />
-            <span style="margin-left: 10px;">{{ option.value.name }}</span> <!-- Nombre del platillo -->
+            <span style="margin-left: 10px;">{{ option.value.name }}</span>
             <input type="number" v-model.number="option.value.quantity" min="1" style="width: 50px; margin-left: 10px;" />
             <span>Quantity</span>
           </div>
           <p v-if="submitted && (!item.dishes || item.dishes.length === 0)" class="p-invalid">Please select at least one dish</p>
         </div>
-
+        -->
       </div>
     </template>
   </create-and-edit>
