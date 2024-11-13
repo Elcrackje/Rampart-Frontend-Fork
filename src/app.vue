@@ -12,7 +12,6 @@ export default {
         {label: 'Home', to: '/home'},
         {label: 'Cocineros', to: '/chefs'},
         {label: 'Publicaciones', to: '/posts'},
-        {label: 'Preposts', to: '/preposts'},
         {label: 'Pedidos', to: '/orders'},
         {label: 'Recetas', to: '/recipes'},
         {label: 'Perfil', to: '/user-profile'},

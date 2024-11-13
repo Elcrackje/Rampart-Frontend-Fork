@@ -22,6 +22,7 @@ export default {
       selectedChef: null,
       selectedDish: null,
       stock: null,
+      unitPrice: null,
       today: null,
       publishDate: null,
     }
@@ -56,7 +57,8 @@ export default {
       this.post = null;
       this.selectedChef = null;
       this.selectedDish = null;
-      this.stock = 1;
+      this.stock = null;
+      this.unitPrice = null;
       this.today = new Date();
       this.publishDate = new Date();
       this.dialogVisible = true;
@@ -70,6 +72,7 @@ export default {
         dishId: this.selectedDish.id,
         stock: this.stock,
         publishDate: this.publishDate.toISOString().split("T")[0],
+        pricePerUnit: this.unitPrice,
       })
       this.postService.create(post)
           .then(() => {
@@ -86,13 +89,14 @@ export default {
 </script>
 
 <template>
-  <template v-if="chefs && dishes && posts">
+  <template v-if="chefs && dishes">
     <pv-button style="margin-bottom: 1rem" label="Crear Publicación" icon="pi pi-plus-circle" @click="openDialog"></pv-button>
     <pv-dialog v-model:visible="dialogVisible" modal header="Crear Publicación">
       <pv-select style="margin-bottom: 1rem" v-model="selectedChef" :options="chefs" optionLabel="name" placeholder="Seleccione un Cocinero"></pv-select>
       <template v-if="selectedChef != null">
         <pv-select v-model="selectedDish" :options="this.getDishesFromChefId(selectedChef.id)" optionLabel="nameOfDish" placeholder="Seleccione un Plato"></pv-select>
         <pv-input-number v-model="stock" placeholder="Ingrese el stock" inputId="integerOnly" :min="1"></pv-input-number>
+        <pv-input-number v-model="unitPrice" placeholder="Ingrese el precio unitario" inputId="currency-pe" mode="currency" currency="PEN" :min="1"></pv-input-number>
         <pv-date-picker v-model="publishDate" :min-date="today"></pv-date-picker>
       </template>
       <template v-if="selectedChef != null && selectedDish != null && stock != null && publishDate != null">
