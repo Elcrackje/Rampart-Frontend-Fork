@@ -33,7 +33,7 @@ export default {
     }
   },
   watch: {
-    amount(newValue) {
+    amount() {
       this.calculatePrice();
     }
   },
@@ -52,7 +52,7 @@ export default {
       this.calculatePrice();
     },
     calculatePrice() {
-      const pricePerDish = 10;
+      const pricePerDish = this.postProp.pricePerUnit;
       this.finalPrice = this.amount * pricePerDish;
     },
     setMinOrderTime() {
@@ -61,7 +61,7 @@ export default {
       return now;
     },
     submitOrder() {
-      const tempDate = new Date(this.postProp.publishDate);
+      const tempDate = new Date(this.postProp.publishDate + 'T00:00:00');
       if (this.deliveryTime) {
         tempDate.setHours(this.deliveryTime.getHours());
         tempDate.setMinutes(this.deliveryTime.getMinutes());
@@ -69,10 +69,11 @@ export default {
       const order = new OrderEntity({
         customerId: 1,
         orderDate: new Date().toISOString().split('T')[0],
-        deliveryDate: tempDate.toISOString(),
+        deliveryDate: tempDate.toISOString().split('T')[0],
+        deliveryTime: this.deliveryTime.getHours() + ":" + this.deliveryTime.getMinutes(),
         paymentMethod: "Yape",
-        totalAmount: this.amount,
-        status: "Pendiente"
+        totalAmount: this.finalPrice,
+        status: "pendiente"
       });
       this.orderService.create(order)
           .then(() => {
@@ -115,6 +116,8 @@ export default {
               <h3 style="margin-top: 2rem">Plato: {{this.dishProp.nameOfDish}}</h3>
               <!img :src="dishProp.image" :alt="dishProp.nameOfDish" width="100%" height="45%">
               <p>Stock: {{this.postProp.stock}}</p>
+              <p>Fecha de Entrega: {{this.postProp.publishDate}}</p>
+              <p>Precio por Unidad: S/{{this.postProp.pricePerUnit}}</p>
               <pv-button label="Ver Ingredientes" icon="pi pi-eye" @click="ingredientListVisible = true" severity="info"></pv-button><br>
               <pv-button style="margin-top: 0.5rem" label="Hacer Pedido" icon="pi pi-plus-circle" @click="openOrderDialog" severity="warn"></pv-button><br>
               <pv-button style="margin-top: 0.5rem" icon="pi pi-trash" @click="deletePost" severity="danger"></pv-button>
@@ -149,23 +152,5 @@ export default {
 </template>
 
 <style scoped>
-
-.big-container {
-  margin-top: 1rem;
-}
-
-.container {
-  display: flex;
-  gap: 1rem;
-}
-
-.card-chef {
-  width: 10rem;
-  align-content: center;
-}
-
-.card-dish {
-  width: 20rem;
-}
 
 </style>

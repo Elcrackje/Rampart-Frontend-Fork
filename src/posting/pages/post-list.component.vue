@@ -20,6 +20,8 @@ export default {
       dishes: [],
       dishService: new DishService(),
       searchQuery: "",
+      selectedDate: new Date(),
+      showAllDates: true,
     }
   },
   created() {
@@ -46,24 +48,28 @@ export default {
         console.error("Error fetching Dishes:", error);
       })
     ]).then(() => {
-      this.filterTodayPosts();
-      this.sortPostsByChefRating();
     });
   },
   computed: {
     filteredPosts() {
-      if (!this.searchQuery) return this.posts; // Display all if no query
+      if (!this.searchQuery && this.showAllDates) return this.posts;
       const query = this.searchQuery.toLowerCase();
       return this.posts.filter(post => {
         const chef = this.getChefFromId(post.chefId);
         const dish = this.getDishFromId(post.dishId);
-        return (
+        const postDate = new Date(post.publishDate + 'T00:00:00');
+        const matchesQuery = (
             dish?.nameOfDish?.toLowerCase().includes(query) ||
             chef?.name?.toLowerCase().includes(query) ||
-            dish?.ingredients?.some(ingredient =>
-                ingredient.toLowerCase().includes(query)
-            )
+            dish?.ingredients?.some(ingredient => ingredient.toLowerCase().includes(query))
         );
+        const matchesDate = (
+            this.showAllDates ||
+            (postDate.getDate() === this.selectedDate.getDate() &&
+                postDate.getMonth() === this.selectedDate.getMonth() &&
+                postDate.getFullYear() === this.selectedDate.getFullYear())
+        );
+        return matchesQuery && matchesDate;
       });
     }
   },
@@ -86,13 +92,11 @@ export default {
 
     filterTodayPosts() {
       this.posts = this.posts.filter((post) => {
-        const today = new Date();
-        today.setDate(today.getDate())
         const postDate = new Date(post.publishDate + 'T00:00:00');
         return (
-            postDate.getDate() === today.getDate() &&
-            postDate.getMonth() === today.getMonth() &&
-            postDate.getFullYear() === today.getFullYear()
+            postDate.getDate() === this.selectedDate.getDate() &&
+            postDate.getMonth() === this.selectedDate.getMonth() &&
+            postDate.getFullYear() === this.selectedDate.getFullYear()
         );
       })
     },
@@ -107,7 +111,6 @@ export default {
           console.error("Error fetching Posts:", error);
         })
       ]).then(() => {
-        this.filterTodayPosts();
         this.sortPostsByChefRating();
       });
     }
@@ -116,13 +119,15 @@ export default {
 </script>
 
 <template>
-  <h2 style="text-align:center; margin-top: 5rem">Publicaciones del día</h2>
+  <h2 style="text-align:center; margin-top: 5rem">Publicaciones</h2>
   <create-post-button @postsUpdated="reloadPosts" style="margin-bottom: 1rem"></create-post-button><br>
   <pv-input-text v-model="searchQuery" placeholder="Buscar por plato, ingredientes o chef"></pv-input-text>
-
-  <div class="post-grid" v-if="filteredPosts.length > 0">
+  <div class="flex items-center justify-content-center gap-2" style="margin-top: 1rem">
+    <pv-date-picker v-if="!showAllDates" v-model="selectedDate"></pv-date-picker><pv-checkbox v-model="showAllDates" input-id="ShowAll" binary></pv-checkbox><label for="ShowAll"> Show All </label>
+  </div>
+  <div class="post-grid" v-if="filteredPosts">
     <div v-for="post in filteredPosts" :key="post.id">
-      <post-display @postsUpdated="reloadPosts" :serviceProp="this.postService" :postProp="post" :chefProp="getChefFromId(getDishFromId(post.dishId).chefId)" :dishProp="getDishFromId(post.dishId)"></post-display>
+      <post-display v-if="getChefFromId(getDishFromId(post.dishId)?.chefId)" @postsUpdated="reloadPosts" :serviceProp="this.postService" :postProp="post" :chefProp="getChefFromId(getDishFromId(post.dishId).chefId)" :dishProp="getDishFromId(post.dishId)"></post-display>
     </div>
   </div>
   <div v-else>
@@ -135,7 +140,7 @@ export default {
 
 .post-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   margin: 20px;
 }
 
