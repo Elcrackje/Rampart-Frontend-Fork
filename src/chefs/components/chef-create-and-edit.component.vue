@@ -14,10 +14,6 @@ export default {
       this.$emit('cancel-requested');
     },
     save() {
-      // Asignar la URL de la imagen según el género
-      const gender = this.item.gender;
-      this.item.imageUrl = gender === 'masculino' ? '/assets/masculino.png' : '/assets/femenino.png';
-
       // Emite el evento con los datos del chef para que se guarden en la base de datos
       this.$emit('save-requested', this.item);
     }
