@@ -61,7 +61,7 @@ export default {
       return now;
     },
     submitOrder() {
-      const tempDate = new Date(this.postProp.publishDate);
+      const tempDate = new Date(this.postProp.publishDate + 'T00:00:00');
       if (this.deliveryTime) {
         tempDate.setHours(this.deliveryTime.getHours());
         tempDate.setMinutes(this.deliveryTime.getMinutes());
