@@ -89,7 +89,7 @@ export default {
 </script>
 
 <template>
-  <template v-if="chefs && dishes && posts">
+  <template v-if="chefs && dishes">
     <pv-button style="margin-bottom: 1rem" label="Crear Publicación" icon="pi pi-plus-circle" @click="openDialog"></pv-button>
     <pv-dialog v-model:visible="dialogVisible" modal header="Crear Publicación">
       <pv-select style="margin-bottom: 1rem" v-model="selectedChef" :options="chefs" optionLabel="name" placeholder="Seleccione un Cocinero"></pv-select>
