@@ -23,10 +23,4 @@ export class PostService {
         return http.delete(`${this.resourceEndpoint}/${id}`);
     }
 
-    //Metodo para obtener las prepublicaciones
-    getPrePosts() {
-        const today = new Date().toISOString().split('T')[0];  // Fecha de hoy en formato 'YYYY-MM-DD'
-        return http.get(`${this.resourceEndpoint}?publishDate_gte=${today}`);  // Filtrar posts cuya fecha de publicación sea mayor o igual a hoy
-    }
-
 }
