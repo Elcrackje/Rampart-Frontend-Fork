@@ -135,8 +135,7 @@
       "name": "Lala Lopez",
       "favorite": true,
       "gender": "femenino",
-      "rating": 4.5,
-      "imageUrl": "/path/to/chef-femenino.jpg"
+      "rating": 4.5
     },
     {
       "id": 3,
@@ -150,16 +149,14 @@
       "name": "Estrella Torres",
       "favorite": false,
       "gender": "femenino",
-      "rating": 4,
-      "imageUrl": "/path/to/chef-femenino.jpg"
+      "rating": 4
     },
     {
       "id": 5,
       "name": "Diego Ro",
       "favorite": false,
       "gender": "masculino",
-      "rating": 5,
-      "imageUrl": "/path/to/chef-masculino.jpg"
+      "rating": 5
     }
   ],
   "dishes": [

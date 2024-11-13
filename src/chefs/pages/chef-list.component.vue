@@ -90,12 +90,6 @@ export default {
     async onSaveRequested(item) {
       this.submitted = true;
       if (this.chef.name.trim()) {
-        if (this.chef.gender === 'masculino') {
-          this.chef.imageUrl = '/path/to/chef-masculino.jpg';
-        } else {
-          this.chef.imageUrl = '/path/to/chef-femenino.jpg'; // O cualquier otra imagen por defecto
-        }
-
         try {
           if (this.isEdit) {
             await this.updateChef();
