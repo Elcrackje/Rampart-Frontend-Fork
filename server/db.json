@@ -1,7 +1,7 @@
 {
   "userProfile": {
     "id": 1,
-    "photo": "/src/assets/me.jpg",
+    "photo": "https://github.com/Rampart-SaboresCercanos/FrontEnd/blob/develop/src/assets/me.jpg?raw=true",
     "name": "Diego Rosado",
     "email": "rosadoiporre@gmail.com",
     "birthDate": "01/01/1990",
@@ -128,35 +128,38 @@
       "name": "Juan Perez",
       "rating": 3.3,
       "favorite": true,
-      "imageUrl": "/src/assets/chef1.png"
+      "gender": "masculino"
     },
     {
       "id": 2,
       "name": "Lala Lopez",
-      "rating": 4.5,
       "favorite": true,
-      "imageUrl": "/src/assets/chef2.png"
+      "gender": "femenino",
+      "rating": 4.5,
+      "imageUrl": "/path/to/chef-femenino.jpg"
     },
     {
       "id": 3,
       "name": "Estefano Jaque",
       "rating": 2,
       "favorite": true,
-      "imageUrl": "/src/assets/chef3.png"
+      "gender": "masculino"
     },
     {
       "id": 4,
-      "name": "Juan Torres",
-      "rating": 5,
+      "name": "Estrella Torres",
       "favorite": false,
-      "imageUrl": "/src/assets/chef4.png"
+      "gender": "femenino",
+      "rating": 4,
+      "imageUrl": "/path/to/chef-femenino.jpg"
     },
     {
       "id": 5,
-      "name": "Sebastián Real",
-      "rating": "1.5",
+      "name": "Diego Ro",
       "favorite": false,
-      "imageUrl": "/src/assets/chef1.png"
+      "gender": "masculino",
+      "rating": 5,
+      "imageUrl": "/path/to/chef-masculino.jpg"
     }
   ],
   "dishes": [

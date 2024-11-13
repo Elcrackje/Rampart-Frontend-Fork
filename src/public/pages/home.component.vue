@@ -11,14 +11,16 @@ export default {
   methods: {
     async fetchPopularDishes() {
       try {
-        // Obtener las publicaciones y los chefs
-        const [postsResponse, chefsResponse] = await Promise.all([
+        // Obtener las publicaciones, los chefs y los platos
+        const [postsResponse, chefsResponse, dishesResponse] = await Promise.all([
           axios.get('http://localhost:3000/posts'),
-          axios.get('http://localhost:3000/chefs')
+          axios.get('http://localhost:3000/chefs'),
+          axios.get('http://localhost:3000/dishes')
         ]);
 
         const posts = postsResponse.data;
         const chefs = chefsResponse.data;
+        const dishes = dishesResponse.data;
 
         // Obtener la fecha actual en formato YYYY-MM-DD
         const today = new Date().toISOString().split('T')[0];
@@ -26,23 +28,23 @@ export default {
         // Filtrar publicaciones que coinciden con la fecha actual
         const todaysPosts = posts.filter(post => post.publishDate === today);
 
+        // Mapear publicaciones con información adicional
         this.popularDishes = todaysPosts.map(post => {
-          const chef = chefs.find(chef => chef.id === post.chefId);
+          const dish = dishes.find(dish => dish.id === post.dishId);
+          const chef = chefs.find(chef => chef.id === dish.chefId);
+
           return {
             id: post.id,
-            name: post.dishName,
-            image: post.image,
+            name: dish ? dish.nameOfDish : 'Desconocido',
+            image: dish ? `/src/assets/dishes/${dish.nameOfDish.replace(/\s+/g, '_').toLowerCase()}.jpg` : '', // Ajusta la ruta de la imagen
             cookName: chef ? chef.name : 'Desconocido',
-            orders: post.orders || 0,
             rating: chef ? chef.rating : 0,
             stock: post.stock || 0,
-            chefId: post.chefId,  // Asegúrate de incluir chefId
-            ingredients: post.ingredients || [],  // Asegúrate de incluir ingredients
-            paymentMethods: post.paymentMethods || [],  // Asegúrate de incluir paymentMethods
-            publishDate: post.publishDate // Asegúrate de incluir publishDate
+            publishDate: post.publishDate
           };
-        }).sort((a, b) => b.rating - a.rating) // Ordenar por rating de mayor a menor
-            .slice(0, 4); // Obtener las 4 mejores
+        })
+            .sort((a, b) => b.stock - a.stock) // Ordenar por stock de mayor a menor
+            .slice(0, 4); // Obtener los 4 con mayor stock
       } catch (error) {
         console.error("Error fetching dishes:", error);
       }
@@ -57,7 +59,6 @@ export default {
 }
 </script>
 
-
 <template>
   <div class="home-page">
     <!-- Sección de bienvenida -->
@@ -71,11 +72,11 @@ export default {
       <h2>Platos Más Populares</h2>
       <div class="dishes-container">
         <div class="dish-card" v-for="dish in popularDishes" :key="dish.id">
-          <img :src="dish.image" :alt="dish.name" class="dish-image" />
           <div class="dish-info">
             <h3>{{ dish.name }}</h3>  <!-- Nombre del plato -->
             <p>Cocinero: {{ dish.cookName }}</p>  <!-- Nombre del chef -->
             <p>Rating: {{ dish.rating }} ⭐</p>  <!-- Rating del chef -->
+            <p>Pedidos: {{ dish.stock }}</p> <!-- Stock disponible -->
           </div>
         </div>
       </div>
@@ -92,14 +93,12 @@ export default {
   </div>
 </template>
 
-
 <style scoped>
 .home-page {
   align-content: center;
-  height: auto;
+  height: 80vh;
   text-align: center;
   padding: 50px 20px;
-  background-color: #f8f9fa;
 }
 
 .hero h1 {
