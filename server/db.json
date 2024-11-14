@@ -36,23 +36,6 @@
       "pricePerUnit": 13
     }
   ],
-  "payment-methods": [
-    {
-      "id": 1,
-      "name": "Efectivo",
-      "logo": "assets/payment-method-logos/efectivo-logo"
-    },
-    {
-      "id": 2,
-      "name": "Tarjeta",
-      "logo": "assets/payment-method-logos/tarjeta-logo"
-    },
-    {
-      "id": 3,
-      "name": "Yape",
-      "logo": "assets/payment-method-logos/yape-logo"
-    }
-  ],
   "orders": [
     {
       "id": 1,
@@ -109,17 +92,6 @@
       "status": "completado",
       "dishes": 2,
       "detailsShown": false
-    },
-    {
-      "id": 6,
-      "customerId": "1",
-      "orderDate": "2024-09-19",
-      "deliveryDate": "2024-09-20",
-      "deliveryTime": "19:30",
-      "paymentMethod": "Yape",
-      "status": "pendiente",
-      "dishes": 1,
-      "detailsShown": false
     }
   ],
   "chefs": [
@@ -150,15 +122,9 @@
       "favorite": false,
       "gender": "femenino",
       "rating": 4
-    },
-    {
-      "id": 5,
-      "name": "Diego Ro",
-      "favorite": false,
-      "gender": "masculino",
-      "rating": 5
     }
   ],
+
   "dishes": [
     {
       "id": 1,
@@ -229,6 +195,30 @@
       ],
       "favorite": true,
       "price": 17.5
+    },
+    {
+      "id": 2,
+      "chefId": 2,
+      "nameOfDish": "Spaghetti a la boloñesa",
+      "ingredients": [
+        "200g de spaghetti",
+        "150g de carne molida",
+        "1 lata de tomate triturado",
+        "1 cebolla",
+        "1 diente de ajo",
+        "Aceite de oliva",
+        "Sal y pimienta",
+        "Queso parmesano al gusto"
+      ],
+      "preparationSteps": [
+        "Cocina los spaghetti según las instrucciones del paquete.",
+        "En una sartén, calienta el aceite y sofríe la cebolla y el ajo picados.",
+        "Agrega la carne molida y cocina hasta que esté dorada.",
+        "Incorpora el tomate triturado, sal y pimienta, y deja cocinar a fuego lento.",
+        "Sirve los spaghetti con la salsa y espolvorea con queso parmesano."
+      ],
+      "favorite": true,
+      "price": 10.5
     }
   ]
 }
