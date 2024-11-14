@@ -9,7 +9,11 @@ export class ChefEntity {
         this.rating = this.validateRating(rating); // Validamos el rating
 
         // Generar la URL de la imagen automáticamente a partir del género
-        this.imageUrl = `/src/assets/chefs/${this.gender}.png`;
+        if (this.gender === 'masculino') {
+            this.imageUrl = 'https://github.com/Rampart-SaboresCercanos/FrontEnd/blob/develop/src/assets/chefs/masculino.png?raw=true';
+        } else if (this.gender === 'femenino') {
+            this.imageUrl = 'https://github.com/Rampart-SaboresCercanos/FrontEnd/blob/develop/src/assets/chefs/femenino.png?raw=true';
+        }
     }
 
     validateRating(rating) {

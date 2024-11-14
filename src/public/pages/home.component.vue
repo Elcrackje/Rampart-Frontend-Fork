@@ -22,27 +22,37 @@ export default {
         const chefs = chefsResponse.data;
         const dishes = dishesResponse.data;
 
-        // Obtener la fecha actual en formato YYYY-MM-DD
-        const today = new Date().toISOString().split('T')[0];
+        console.log(posts); // Verifica los posts
+        console.log(chefs); // Verifica los chefs
+        console.log(dishes); // Verifica los dishes
 
-        // Filtrar publicaciones que coinciden con la fecha actual
-        const todaysPosts = posts.filter(post => post.publishDate === today);
+        // Obtener la fecha actual en formato YYYY-MM-DD
+        const threeDaysAgo = new Date();
+        threeDaysAgo.setDate(threeDaysAgo.getDate() - 3);
+        const threeDaysAgoFormatted = threeDaysAgo.toISOString().split('T')[0];
+
+        const recentPosts = posts.filter(post => post.publishDate >= threeDaysAgoFormatted);
+        console.log(recentPosts); // Verifica los platos recientes
 
         // Mapear publicaciones con información adicional
-        this.popularDishes = todaysPosts.map(post => {
-          const dish = dishes.find(dish => dish.id === post.dishId);
-          const chef = chefs.find(chef => chef.id === dish.chefId);
+        this.popularDishes = recentPosts.map(post => {
+          try {
+            const dish = dishes.find(dish => dish.id === post.dishId);
+            const chef = chefs.find(chef => chef.id === dish?.chefId);
 
-          return {
-            id: post.id,
-            name: dish ? dish.nameOfDish : 'Desconocido',
-            image: dish ? `/src/assets/dishes/${dish.nameOfDish.replace(/\s+/g, '_').toLowerCase()}.jpg` : '', // Ajusta la ruta de la imagen
-            cookName: chef ? chef.name : 'Desconocido',
-            rating: chef ? chef.rating : 0,
-            stock: post.stock || 0,
-            publishDate: post.publishDate
-          };
-        })
+            return {
+              id: post.id,
+              name: dish ? dish.nameOfDish : 'Desconocido',
+              cookName: chef ? chef.name : 'Desconocido',
+              rating: chef ? chef.rating : 0,
+              stock: post.stock || 0,
+              publishDate: post.publishDate
+            };
+          } catch (error) {
+            console.error('Error al procesar el plato:', post, error);
+            return null; // Devuelve null si hay un error
+          }
+        }).filter(dish => dish !== null) // Filtra platos nulos
             .sort((a, b) => b.stock - a.stock) // Ordenar por stock de mayor a menor
             .slice(0, 4); // Obtener los 4 con mayor stock
       } catch (error) {
@@ -54,7 +64,8 @@ export default {
     }
   },
   async mounted() {
-    await this.fetchPopularDishes(); // Llamar a la función para obtener platos al montar el componente
+    await this.fetchPopularDishes();
+    console.log('Platos populares:', this.popularDishes); // Verificar los datos
   },
 }
 </script>

@@ -26,6 +26,4 @@ export class ChefService {
     findByFavorite() {
         return http.get(`${this.resourceEndpoint}?favorite=true`); // Asumiendo que el endpoint puede filtrar por favorito
     }
-
-
 }
