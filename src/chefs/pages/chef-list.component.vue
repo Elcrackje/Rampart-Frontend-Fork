@@ -212,8 +212,8 @@ export default {
         :item="chef"
         :isEdit="isEdit"
         :isVisible="createAndEditDialogIsVisible"
-    @cancel-requested="onCancelRequested"
-    @save-requested="onSaveRequested"
+        @cancel-requested="onCancelRequested"
+        @save-requested="onSaveRequested"
     />
   </div>
 </template>
