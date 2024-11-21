@@ -1,28 +1,21 @@
+import http from "../../shared/services/http-common.js";
 
-import axios from "axios";
-
-const api = axios.create({
-    baseURL: 'https://localhost:44331',// Reemplaza con la URL de tu backend
-});
 
 export class OrderService {
-    //resourceEndpoint = '/orders';
 
     getAll() {
-        return api.get('/api/v1/orders');
+        return http.get('/orders');
     }
 
     create(Resource) {
-        return api.post('/api/v1/orders', Resource);
+        return http.post('/orders', Resource);
     }
 
     update(id, Resource) {
-        return api.put(`/api/v1/orders/${id}`, Resource);
+        return http.put(`/orders/${id}`, Resource);
     }
 
     delete(id) {
-        return api.delete(`/api/v1/orders/${id}`);
+        return http.delete(`/orders/${id}`);
     }
 }
-
-export default api;
