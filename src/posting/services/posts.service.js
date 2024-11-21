@@ -1,7 +1,7 @@
 import http from "../../shared/services/http-common.js";
 
 export class PostService {
-    resourceEndpoint = '';
+    resourceEndpoint = '/posts';
 
     getAll() {
         return http.get(this.resourceEndpoint);

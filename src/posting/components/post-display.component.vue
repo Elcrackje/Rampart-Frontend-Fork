@@ -69,7 +69,7 @@ export default {
       const order = new OrderEntity({
         customerId: 1,
         orderDate: new Date().toISOString().split('T')[0],
-        deliveryDate: tempDate.toISOString().split('T')[0],
+        deliveryDate: this.postProp.publishDate,
         deliveryTime: this.deliveryTime.getHours() + ":" + this.deliveryTime.getMinutes(),
         paymentMethod: "Yape",
         totalAmount: this.finalPrice,

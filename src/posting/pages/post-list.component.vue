@@ -57,7 +57,7 @@ export default {
       return this.posts.filter(post => {
         const chef = this.getChefFromId(post.chefId);
         const dish = this.getDishFromId(post.dishId);
-        const postDate = new Date(post.publishDate + 'T00:00:00');
+        const postDate = new Date(post.publishDate);
         const matchesQuery = (
             dish?.nameOfDish?.toLowerCase().includes(query) ||
             chef?.name?.toLowerCase().includes(query) ||
