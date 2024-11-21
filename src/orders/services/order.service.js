@@ -1,7 +1,7 @@
 import http from "../../shared/services/http-common.js";
 
 export class OrderService {
-    resourceEndpoint = '/orders';
+    resourceEndpoint = '';
 
     getAll() {
         return http.get(this.resourceEndpoint);

@@ -2,7 +2,7 @@ export class ChefEntity {
     constructor({id = 0, name = '', rating = 0.0, favorite = false, gender = ''}) {
         this.id = id;
         this.name = name;
-        this.favorite = favorite;
+        this.isfavorite = favorite;
         this.gender = gender;
 
         // Asegurarse de que rating sea un número flotante (decimal)

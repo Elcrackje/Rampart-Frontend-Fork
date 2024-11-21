@@ -19,7 +19,7 @@ const router = createRouter({
         { path: "/posts", name: 'posts', component: PostListComponent, meta: { title: 'Posts'}},
         { path: '/user-profile',            name: 'userProfile', component: UserProfileComponent, meta: { title: 'User Profile'} }, // Nueva ruta
         { path: '/',                        redirect: '/home' },
-        { path: '/recipes',   name: 'recipes', component: DishListComponent, meta: { title: 'Recipes'}},
+        { path: '/dishes',   name: 'dishes', component: DishListComponent, meta: { title: 'Recipes'}},
         { path: '/favorites',   name: 'favorites', component: FavoritePageComponent, meta: { title: 'Favoritos'}},
         {path: '/:pathMatch(.*)*', component: PageNotFoundComponent},
     ]
@@ -28,7 +28,7 @@ const router = createRouter({
 router.beforeEach((to,
                    from,
                    next) => {
-    let baseTitle = 'ACME Learning Center';
+    let baseTitle = 'Sabores Cercanos';
     document.title = `${baseTitle} | ${to.meta['title']}`;
     next();
 });

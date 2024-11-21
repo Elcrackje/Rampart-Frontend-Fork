@@ -1,5 +1,4 @@
 import http from "../../shared/services/http-common.js";
-import axios from "axios";
 
 export class DishService {
     resourceEndpoint = '/dishes';

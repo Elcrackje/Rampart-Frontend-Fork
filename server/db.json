@@ -124,13 +124,12 @@
       "rating": 4
     }
   ],
-
   "dishes": [
     {
-      "id": 1,
-      "chefId": 1,
-      "nameOfDish": "Puré con milanesa",
-      "ingredients": [
+      "Id": 1,
+      "ChefId": 1,
+      "NameOfDish": "Puré con milanesa",
+      "Ingredients": [
         "2 papas amarillas",
         "1 taza de leche evaporada",
         "50g de mantequilla",
@@ -140,21 +139,20 @@
         "Aceite para freír",
         "Sal y pimienta"
       ],
-      "preparationSteps": [
+      "PreparationSteps": [
         "Hierve las papas en agua con sal hasta que estén blandas, luego haz un puré añadiendo leche y mantequilla.",
         "Sazona los filetes de carne con sal y pimienta.",
         "Pasa los filetes por huevo batido y luego por pan rallado.",
         "Fríe los filetes en abundante aceite caliente hasta que estén dorados y crujientes.",
         "Sirve la milanesa acompañada del puré de papas."
       ],
-      "favorite": false,
-      "price": 14.5
+      "Favorite": false
     },
     {
-      "id": 2,
-      "chefId": 2,
-      "nameOfDish": "Spaghetti a la boloñesa",
-      "ingredients": [
+      "Id": 2,
+      "ChefId": 2,
+      "NameOfDish": "Spaghetti a la boloñesa",
+      "Ingredients": [
         "200g de spaghetti",
         "150g de carne molida",
         "1 lata de tomate triturado",
@@ -164,21 +162,20 @@
         "Sal y pimienta",
         "Queso parmesano al gusto"
       ],
-      "preparationSteps": [
+      "PreparationSteps": [
         "Cocina los spaghetti según las instrucciones del paquete.",
         "En una sartén, calienta el aceite y sofríe la cebolla y el ajo picados.",
         "Agrega la carne molida y cocina hasta que esté dorada.",
         "Incorpora el tomate triturado, sal y pimienta, y deja cocinar a fuego lento.",
         "Sirve los spaghetti con la salsa y espolvorea con queso parmesano."
       ],
-      "favorite": true,
-      "price": 10.5
+      "Favorite": true
     },
     {
-      "id": 3,
-      "chefId": 1,
-      "nameOfDish": "Pancakes de avena",
-      "ingredients": [
+      "Id": 3,
+      "ChefId": 1,
+      "NameOfDish": "Pancakes de avena",
+      "Ingredients": [
         "1 taza de avena",
         "1 manzana",
         "1 huevo",
@@ -186,21 +183,20 @@
         "1 cucharadita de polvo de hornear",
         "Miel al gusto"
       ],
-      "preparationSteps": [
+      "PreparationSteps": [
         "Licúa la avena, plátano, huevo y leche hasta obtener una mezcla homogénea.",
         "Agrega el polvo de hornear y mezcla bien.",
         "Calienta una sartén y vierte un poco de la mezcla formando pancakes.",
         "Cocina por ambos lados hasta dorar.",
         "Sirve con miel y frutas al gusto."
       ],
-      "favorite": true,
-      "price": 17.5
+      "Favorite": true
     },
     {
-      "id": 2,
-      "chefId": 2,
-      "nameOfDish": "Spaghetti a la boloñesa",
-      "ingredients": [
+      "Id": 2,
+      "ChefId": 2,
+      "NameOfDish": "Spaghetti a la boloñesa",
+      "Ingredients": [
         "200g de spaghetti",
         "150g de carne molida",
         "1 lata de tomate triturado",
@@ -210,15 +206,14 @@
         "Sal y pimienta",
         "Queso parmesano al gusto"
       ],
-      "preparationSteps": [
+      "PreparationSteps": [
         "Cocina los spaghetti según las instrucciones del paquete.",
         "En una sartén, calienta el aceite y sofríe la cebolla y el ajo picados.",
         "Agrega la carne molida y cocina hasta que esté dorada.",
         "Incorpora el tomate triturado, sal y pimienta, y deja cocinar a fuego lento.",
         "Sirve los spaghetti con la salsa y espolvorea con queso parmesano."
       ],
-      "favorite": true,
-      "price": 10.5
+      "Favorite": true
     }
   ]
 }

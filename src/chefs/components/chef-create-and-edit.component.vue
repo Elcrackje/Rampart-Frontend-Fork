@@ -35,7 +35,7 @@ export default {
       </div>
       <div class="favorite">
         <label for="favorite">¿Es favorito?</label>
-        <input type="checkbox" id="favorite" v-model="item.favorite" />
+        <input type="checkbox" id="favorite" v-model="item.isfavorite" />
       </div>
       <div class="gender">
         <label for="gender">Género:</label>

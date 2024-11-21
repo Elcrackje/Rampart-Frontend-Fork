@@ -13,7 +13,7 @@ export default {
         {label: 'Cocineros', to: '/chefs'},
         {label: 'Publicaciones', to: '/posts'},
         {label: 'Pedidos', to: '/orders'},
-        {label: 'Recetas', to: '/recipes'},
+        {label: 'Recetas', to: '/dishes'},
         {label: 'Perfil', to: '/user-profile'},
         {label: 'Favoritos', to: '/favorites'},
       ]

@@ -28,10 +28,10 @@ export default {
   methods: {
     // Cambia el estado de favorito de un chef
     async toggleFavorite(chef) {
-      chef.favorite = !chef.favorite;
+      chef.isfavorite = !chef.isfavorite;
       try {
         await this.chefService.update(chef.id, chef);
-        this.notifySuccessfulAction(`Chef ${chef.favorite ? 'añadido a favoritos' : 'eliminado de favoritos'}`);
+        this.notifySuccessfulAction(`Chef ${chef.isfavorite ? 'añadido a favoritos' : 'eliminado de favoritos'}`);
       } catch (error) {
         console.error("Error updating favorite status:", error);
       }
@@ -193,7 +193,7 @@ export default {
       <pv-card v-for="chef in filteredChefs" :key="chef.id" class="chef-card">
         <template #header>
           <button class="favorite-button" @click="toggleFavorite(chef)">
-            <i :class="chef.favorite ? 'fas fa-heart' : 'far fa-heart'"></i>
+            <i :class="chef.isfavorite ? 'fas fa-heart' : 'far fa-heart'"></i>
           </button>
           <h3>{{ chef.name }}</h3>
         </template>

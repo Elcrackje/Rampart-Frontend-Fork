@@ -1,7 +1,7 @@
 import http from "../../shared/services/http-common.js";
 
 export class UserProfileService {
-    resourceEndpoint = '/userProfile';
+    resourceEndpoint = '';
 
     getAll() {
         return http.get(this.resourceEndpoint);
