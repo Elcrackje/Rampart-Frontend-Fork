@@ -98,23 +98,29 @@
     {
       "id": 1,
       "name": "Juan Perez",
+      "isfavorite": true,
+      "gender": "masculino",
       "rating": 3.3,
-      "favorite": true,
-      "gender": "masculino"
+      "imageUrl": "https://github.com/Rampart-SaboresCercanos/FrontEnd/blob/develop/src/assets/chefs/masculino.png?raw=true",
+      "favorite": false
     },
     {
       "id": 2,
       "name": "Lala Lopez",
-      "favorite": true,
+      "isfavorite": true,
       "gender": "femenino",
-      "rating": 4.5
+      "rating": 4.5,
+      "imageUrl": "https://github.com/Rampart-SaboresCercanos/FrontEnd/blob/develop/src/assets/chefs/femenino.png?raw=true",
+      "favorite": false
     },
     {
       "id": 3,
       "name": "Estefano Jaque",
+      "isfavorite": true,
+      "gender": "masculino",
       "rating": 2,
-      "favorite": true,
-      "gender": "masculino"
+      "imageUrl": "https://github.com/Rampart-SaboresCercanos/FrontEnd/blob/develop/src/assets/chefs/masculino.png?raw=true",
+      "favorite": false
     },
     {
       "id": 4,
@@ -169,7 +175,8 @@
         "Incorpora el tomate triturado, sal y pimienta, y deja cocinar a fuego lento.",
         "Sirve los spaghetti con la salsa y espolvorea con queso parmesano."
       ],
-      "favorite": true
+      "favorite": false,
+      "price": ""
     },
     {
       "id": 3,
@@ -190,7 +197,8 @@
         "Cocina por ambos lados hasta dorar.",
         "Sirve con miel y frutas al gusto."
       ],
-      "favorite": true
+      "favorite": true,
+      "price": ""
     },
     {
       "id": 2,
