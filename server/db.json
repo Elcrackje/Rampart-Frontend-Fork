@@ -6,9 +6,9 @@
     "email": "rosadoiporre@gmail.com",
     "birthDate": "01/01/1990",
     "address": "Calle 1 Urb. San Felipe 257",
-    "paymentMethod": "Yape",
+    "paymentMethod": "Efectivo",
     "cardNumber": "4772 **** **** 8898",
-    "yapeNumber": "",
+    "yapeNumber": "987789789",
     "cashPayment": false,
     "preferences": [
       "Pescados y Mariscos",
@@ -16,8 +16,7 @@
       "Comida Internacional",
       "Comida Saludable",
       "Hamburguesas y Sandwiches",
-      "Sushi",
-      "Pollos y Parrillas"
+      "Sushi"
     ]
   },
   "posts": [
@@ -101,13 +100,13 @@
       "isfavorite": true,
       "gender": "masculino",
       "rating": 3.3,
-      "imageUrl": "https://github.com/Rampart-SaboresCercanos/FrontEnd/blob/develop/src/assets/chefs/masculino.png?raw=true",
-      "favorite": false
+      "isFavorite": true,
+      "gender": "masculino"
     },
     {
       "id": 2,
       "name": "Lala Lopez",
-      "isfavorite": true,
+      "isFavorite": true,
       "gender": "femenino",
       "rating": 4.5,
       "imageUrl": "https://github.com/Rampart-SaboresCercanos/FrontEnd/blob/develop/src/assets/chefs/femenino.png?raw=true",
@@ -119,13 +118,13 @@
       "isfavorite": true,
       "gender": "masculino",
       "rating": 2,
-      "imageUrl": "https://github.com/Rampart-SaboresCercanos/FrontEnd/blob/develop/src/assets/chefs/masculino.png?raw=true",
-      "favorite": false
+      "isFavorite": true,
+      "gender": "masculino"
     },
     {
       "id": 4,
       "name": "Estrella Torres",
-      "favorite": false,
+      "isFavorite": false,
       "gender": "femenino",
       "rating": 4
     }
@@ -145,6 +144,7 @@
         "Aceite para freír",
         "Sal y pimienta"
       ],
+      "dietaryPreferences": ["Carnívoro", "No apto para veganos"],
       "preparationSteps": [
         "Hierve las papas en agua con sal hasta que estén blandas, luego haz un puré añadiendo leche y mantequilla.",
         "Sazona los filetes de carne con sal y pimienta.",
@@ -176,7 +176,6 @@
         "Sirve los spaghetti con la salsa y espolvorea con queso parmesano."
       ],
       "favorite": false,
-      "price": ""
     },
     {
       "id": 3,
@@ -190,6 +189,7 @@
         "1 cucharadita de polvo de hornear",
         "Miel al gusto"
       ],
+      "dietaryPreferences": ["Vegano", "Sin gluten"],
       "preparationSteps": [
         "Licúa la avena, plátano, huevo y leche hasta obtener una mezcla homogénea.",
         "Agrega el polvo de hornear y mezcla bien.",
@@ -198,30 +198,6 @@
         "Sirve con miel y frutas al gusto."
       ],
       "favorite": true,
-      "price": ""
-    },
-    {
-      "id": 2,
-      "chefId": 2,
-      "nameOfDish": "Spaghetti a la boloñesa",
-      "ingredients": [
-        "200g de spaghetti",
-        "150g de carne molida",
-        "1 lata de tomate triturado",
-        "1 cebolla",
-        "1 diente de ajo",
-        "Aceite de oliva",
-        "Sal y pimienta",
-        "Queso parmesano al gusto"
-      ],
-      "preparationSteps": [
-        "Cocina los spaghetti según las instrucciones del paquete.",
-        "En una sartén, calienta el aceite y sofríe la cebolla y el ajo picados.",
-        "Agrega la carne molida y cocina hasta que esté dorada.",
-        "Incorpora el tomate triturado, sal y pimienta, y deja cocinar a fuego lento.",
-        "Sirve los spaghetti con la salsa y espolvorea con queso parmesano."
-      ],
-      "favorite": true
     }
   ]
 }
