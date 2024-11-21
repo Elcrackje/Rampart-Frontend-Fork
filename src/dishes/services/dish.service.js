@@ -1,7 +1,7 @@
 import http from "../../shared/services/http-common.js";
 
 export class DishService {
-    resourceEndpoint = '/dishes';
+    resourceEndpoint = '/dish';
 
     getAll() {
         return http.get(this.resourceEndpoint);

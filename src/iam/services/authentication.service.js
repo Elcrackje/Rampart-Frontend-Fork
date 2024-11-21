@@ -12,7 +12,7 @@ export class AuthenticationService {
      * @returns {Promise<http.AxiosResponse<SignInResponse>>}
      */
     signIn(signInRequest) {
-        return http.post("/api/v1/authentication/sign-in", signInRequest);
+        return http.post("/authentication/sign-in", signInRequest);
     }
 
     /**
@@ -21,6 +21,6 @@ export class AuthenticationService {
      * @returns {Promise<http.AxiosResponse<SignUpResponse>>}
      */
     signUp(signUpRequest) {
-        return http.post("/api/v1/authentication/sign-up", signUpRequest);
+        return http.post("/authentication/sign-up", signUpRequest);
     }
 }
