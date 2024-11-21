@@ -1,12 +1,12 @@
 export class ChefEntity {
-    constructor({id = 0, name = '', rating = 0.0, favorite = false, gender = ''}) {
+    constructor({ id = 0, name = '', rating = 0.0, isFavorite = false, gender = '' }) {
         this.id = id;
         this.name = name;
-        this.favorite = favorite;
+        this.isFavorite = isFavorite;
         this.gender = gender;
 
-        // Asegurarse de que rating sea un número flotante (decimal)
-        this.rating = this.validateRating(rating); // Validamos el rating
+        // Validar y asignar el rating
+        this.rating = this.validateRating(rating);
 
         // Generar la URL de la imagen automáticamente a partir del género
         if (this.gender === 'masculino') {
@@ -17,7 +17,7 @@ export class ChefEntity {
     }
 
     validateRating(rating) {
-        const parsedRating = parseFloat(rating); // Convertir a número flotante
-        return isNaN(parsedRating) ? 0.0 : parsedRating; // Si no es un número válido, asignar 0.0
+        const parsedRating = parseFloat(rating);
+        return isNaN(parsedRating) || parsedRating < 0 || parsedRating > 5 ? 0.0 : parsedRating;
     }
 }

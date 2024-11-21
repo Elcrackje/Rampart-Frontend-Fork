@@ -10,32 +10,67 @@ export default {
     isVisible: Boolean
   },
   methods: {
+    validateRating() {
+      if (this.item.rating < 0 || this.item.rating > 5) {
+        this.item.rating = 0; // Resetea a un valor válido
+      }
+    },
     closeDialog() {
       this.$emit('cancel-requested');
     },
     save() {
-      // Emite el evento con los datos del chef para que se guarden en la base de datos
+      console.log("Datos a guardar antes de emitir:", this.item);
+
+      // Si usas el dropdown o toggle, ya no necesitas convertir isFavorite a 1 o 0
+      // Solo debes asegurarte de que rating esté en formato flotante
+      this.item.rating = parseFloat(this.item.rating);
+
+      console.log("Datos después de la conversión:", this.item);
+
+      // Emitir el evento con los datos del chef
       this.$emit('save-requested', this.item);
-    }
+    },
   }
 };
 </script>
 
+
 <template>
   <div v-if="isVisible" class="dialog">
-    <h2>{{ isEdit ? 'Editar Chef' : 'Agregar Chef' }}</h2>
     <form @submit.prevent="save">
+      <h2>{{ isEdit ? 'Editar Chef' : 'Agregar Chef' }}</h2>
       <div>
         <label for="name">Nombre:</label>
-        <input type="text" id="name" v-model="item.name" placeholder="Ingrese el nombre del chef" required />
+        <input
+            type="text"
+            id="name"
+            v-model="item.name"
+            placeholder="Ingrese el nombre del chef"
+            required
+            aria-required="true"
+            aria-label="Nombre del chef"
+        />
       </div>
       <div class="rating">
         <label for="rating">Rating:</label>
-        <input type="number" id="rating" v-model="item.rating" min="0" max="5" step="0.1" required />
+        <input
+            type="number"
+            id="rating"
+            v-model="item.rating"
+            min="0" max="5" step="0.1"
+            required
+            @input="validateRating"
+        />
+        <small v-if="item.rating < 0 || item.rating > 5" class="error">
+          El rating debe estar entre 0 y 5.
+        </small>
       </div>
       <div class="favorite">
         <label for="favorite">¿Es favorito?</label>
-        <input type="checkbox" id="favorite" v-model="item.favorite" />
+        <select id="favorite" v-model="item.isFavorite">
+          <option :value="true">Sí</option>
+          <option :value="false">No</option>
+        </select>
       </div>
       <div class="gender">
         <label for="gender">Género:</label>
@@ -46,7 +81,7 @@ export default {
       </div>
       <div class="actions">
         <button type="submit">Guardar</button>
-        <button @click="closeDialog" type="button">Cancelar</button>
+        <button type="button" @click.stop="closeDialog">Cancelar</button>
       </div>
     </form>
   </div>
@@ -82,6 +117,7 @@ h2 {
   text-align: center;
   margin-bottom: 20px;
   color: #333;
+  margin-top: 0; /* Asegura que no haya margen innecesario arriba */
 }
 
 label {
@@ -100,6 +136,11 @@ select {
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 16px;
+}
+
+.error {
+  color: red;
+  font-size: 0.9em;
 }
 
 .rating,
@@ -175,5 +216,18 @@ button[type="button"]:hover {
   to {
     transform: scale(1);
   }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.dialog.leave-active {
+  animation: fadeOut 0.3s ease-out;
 }
 </style>

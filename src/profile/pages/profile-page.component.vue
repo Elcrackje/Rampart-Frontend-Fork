@@ -33,10 +33,28 @@ export default {
         "Comida Sin Gluten",
         "Desayunos",
         "Postres y Tortas"
-      ]
+      ],
+      notifications: [],
     };
   },
   methods: {
+    async created() {
+      const userPreferences = ['Pescados', 'Mariscos'];
+
+      try {
+        const response = await axios.get('/api/posts/by-preferences', {
+          params: { preferences: userPreferences },
+        });
+
+        this.notifications = response.data.map(post => ({
+          preference: post.preferenceName, // Asume que el backend devuelve esto
+          link: `/posts/${post.id}`, // Generar un enlace dinámico
+        }));
+      } catch (error) {
+        console.error('Error al obtener notificaciones:', error);
+      }
+    },
+
     async fetchUserProfile() {
       try {
         const response = await axios.get('http://localhost:3000/userProfile');
@@ -174,8 +192,15 @@ export default {
       const index = this.user.preferences.indexOf(preference);
       if (index > -1) {
         this.user.preferences.splice(index, 1);
-      } else {
+      } else if (this.user.preferences.length < 4 || this.user.preferences.includes(preference)) {
         this.user.preferences.push(preference);
+      } else {
+        Swal.fire({
+          title: 'Error',
+          text: 'Solo puedes seleccionar un máximo de 4 preferencias.',
+          icon: 'warning',
+          confirmButtonText: 'Aceptar',
+        });
       }
     }
   },
@@ -285,13 +310,16 @@ export default {
       <div class="notifications">
         <h2>Notificaciones</h2>
 
-        <div class="notification-container">
-          <p>
-            Hay un nuevo plato popular en tu preferencia de
-            <strong>Pescados y Mariscos</strong>.
-            <router-link to="/" class="notification-link">Míralo ahora</router-link>.
-          </p>
+        <div v-if="notifications.length > 0">
+          <div v-for="(notification, index) in notifications" :key="index" class="notification-container">
+            <p>
+              Hay un nuevo plato popular en tu preferencia de
+              <strong>{{ notification.preference }}</strong>.
+              <router-link :to="notification.link" class="notification-link">Míralo ahora</router-link>.
+            </p>
+          </div>
         </div>
+        <p v-else>No hay notificaciones en este momento.</p>
       </div>
     </div>
   </div>

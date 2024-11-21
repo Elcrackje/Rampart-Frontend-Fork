@@ -7,40 +7,60 @@ import Swal from 'sweetalert2'; // Importa SweetAlert2
 
 export default {
   name: "chef-list.component",
-  components: {ChefCreateAndEditDialog, DataManager},
+  components: { ChefCreateAndEditDialog, DataManager },
   data() {
     return {
-      title: {singular: "Chef", plural: "Chefs"},
+      title: { singular: "Chef", plural: "Chefs" },
       chefs: [],
       chef: new ChefEntity({}),
-      selectedChefs: [],
-      searchName: "", // Campo de búsqueda por nombre
-      searchRating: "", // Campo de búsqueda por rating
+      searchName: "",
+      searchRating: "",
       chefService: new ChefService(),
       createAndEditDialogIsVisible: false,
       isEdit: false,
-      submitted: false,
-      imageUrl: "",
-      selectedRecipe: null, // Receta seleccionada para editar
-      isDialogVisible: false, // Controla la visibilidad del modal
+      loading: false, // Indicador de carga
     };
   },
   methods: {
+    async loadChefs() {
+      this.loading = true;
+      try {
+        const response = await this.chefService.getAll();
+        this.chefs = response.data.map(chef => {
+          return new ChefEntity({
+            ...chef,
+            isFavorite: !!chef.isFavorite,
+            imageUrl: chef.gender === 'masculino'
+                ? '/path/to/chef-masculino.jpg'
+                : '/path/to/chef-femenino.jpg',
+          });
+        });
+      } catch (error) {
+        console.error("Error fetching Chefs:", error);
+      } finally {
+        this.loading = false;
+      }
+    },
+
     // Cambia el estado de favorito de un chef
     async toggleFavorite(chef) {
-      chef.favorite = !chef.favorite;
+      chef.updating = true; // Deshabilita temporalmente la acción
+      chef.isFavorite = !chef.isFavorite;
       try {
         await this.chefService.update(chef.id, chef);
-        this.notifySuccessfulAction(`Chef ${chef.favorite ? 'añadido a favoritos' : 'eliminado de favoritos'}`);
+        this.notifySuccessfulAction(`Chef ${chef.isFavorite ? 'añadido a favoritos' : 'eliminado de favoritos'}`);
       } catch (error) {
-        console.error("Error updating favorite status:", error);
+        console.error("Error actualizando favorito:", error);
+        chef.isFavorite = !chef.isFavorite; // Revertir en caso de error
+      } finally {
+        chef.updating = false;
       }
     },
 
     async confirmDeleteChef(chef) {
       const result = await Swal.fire({
         title: '¿Estás seguro?',
-        text: `Eliminando a ${chef.name}`,
+        text: `Eliminarás a ${chef.name}`,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -50,14 +70,14 @@ export default {
       });
 
       if (result.isConfirmed) {
-        await this.deleteChef(chef); // Asegúrate de llamar a deleteChef, no onDeleteItem
+        await this.deleteChef(chef);
         Swal.fire('Eliminado', 'El chef ha sido eliminado', 'success');
       }
     },
 
     // Notifica al usuario sobre una acción exitosa
     notifySuccessfulAction(message) {
-      this.$toast.add({severity: "success", summary: "Success", detail: message, life: 3000});
+      this.$toast.add({ severity: "success", summary: "Éxito", detail: message, life: 3000 });
     },
 
     // Encuentra el índice de un chef por su id
@@ -67,28 +87,24 @@ export default {
 
     // Muestra el diálogo para crear un nuevo chef
     onNewItem() {
-      this.chef = new ChefEntity({}); // Crear un objeto vacío para el nuevo chef
+      this.chef = new ChefEntity({});
       this.isEdit = false;
-      this.createAndEditDialogIsVisible = true; // Mostrar el cuadro de diálogo
-      console.log('Diálogo visible:', this.createAndEditDialogIsVisible); // Verifica el valor
+      this.createAndEditDialogIsVisible = true;
     },
 
     // Muestra el diálogo para editar un chef existente
     onEditItem(item) {
       this.chef = new ChefEntity(item);
       this.isEdit = true;
-      this.submitted = false;
-      this.createAndEditDialogIsVisible = true; // Asegúrate de que el diálogo se muestre
+      this.createAndEditDialogIsVisible = true;
     },
 
     onCancelRequested() {
-      this.createAndEditDialogIsVisible = false; // Cierra el diálogo
-      this.submitted = false;
+      this.createAndEditDialogIsVisible = false;
       this.isEdit = false;
     },
 
-    async onSaveRequested(item) {
-      this.submitted = true;
+    async onSaveRequested() {
       if (this.chef.name.trim()) {
         try {
           if (this.isEdit) {
@@ -96,6 +112,7 @@ export default {
           } else {
             await this.createChef();
           }
+          console.log(this.chef); // Verifica si los datos están correctos
           this.createAndEditDialogIsVisible = false;
         } catch (error) {
           console.error("Error en la operación:", error);
@@ -107,11 +124,10 @@ export default {
     async createChef() {
       try {
         const response = await this.chefService.create(this.chef);
-        if (response && response.data) {
+        if (response?.data) {
           this.chefs.push(new ChefEntity(response.data));
           this.notifySuccessfulAction("Chef creado exitosamente");
         }
-        this.createAndEditDialogIsVisible = false; // Ocultar el cuadro de diálogo
       } catch (error) {
         console.error("Error creando Chef:", error);
       }
@@ -121,10 +137,15 @@ export default {
     async updateChef() {
       try {
         const response = await this.chefService.update(this.chef.id, this.chef);
-        if (response && response.data) {
+        if (response?.data) {
           const index = this.findIndexById(this.chef.id);
-          this.chefs[index] = new ChefEntity(response.data);
+          if (index !== -1) {
+            // Actualiza el chef en la lista directamente
+            this.chefs[index] = new ChefEntity(response.data);
+          }
           this.notifySuccessfulAction("Chef actualizado exitosamente");
+          // Llama a loadChefs() para actualizar los chefs desde el servidor
+          await this.loadChefs();
         }
       } catch (error) {
         console.error("Error actualizando Chef:", error);
@@ -134,44 +155,31 @@ export default {
     // Elimina un chef específico
     async deleteChef(chef) {
       try {
-        await this.chefService.delete(chef.id); // Elimina el chef usando el servicio
-        const index = this.findIndexById(chef.id); // Encuentra el chef en la lista
-        if (index !== -1) {
-          this.chefs.splice(index, 1); // Elimina el chef de la lista
-        }
-        this.notifySuccessfulAction("Chef eliminado exitosamente"); // Muestra la notificación
+        await this.chefService.delete(chef.id);
+        const index = this.findIndexById(chef.id);
+        if (index !== -1) this.chefs.splice(index, 1);
+        this.notifySuccessfulAction("Chef eliminado exitosamente");
       } catch (error) {
-        console.error("Error eliminando Chef:", error); // Si hay un error, lo muestra en la consola
+        console.error("Error eliminando Chef:", error);
       }
     },
   },
-
   // Propiedad computada para filtrar chefs por nombre y rating
   computed: {
     filteredChefs() {
       const nameQuery = this.searchName.toLowerCase();
-      const ratingQuery = this.searchRating ? parseFloat(this.searchRating) : null;
+      const ratingQuery = parseFloat(this.searchRating) || 0;
 
-      return this.chefs.filter(chef => {
-        const matchesName = chef.name.toLowerCase().includes(nameQuery);
-        const matchesRating = ratingQuery ? chef.rating >= ratingQuery : true;
-        return matchesName && matchesRating;
-      });
-    }
+      return this.chefs.filter(chef =>
+          chef.name.toLowerCase().includes(nameQuery) &&
+          chef.rating >= ratingQuery
+      );
+    },
   },
 
   // Obtiene la lista de chefs al crear el componente
-  async created() {
-    try {
-      const response = await this.chefService.getAll();
-      this.chefs = response.data.map((chef) => {
-        // Aquí se asume que chef.gender existe y puede ser 'masculino'
-        chef.imageUrl = chef.gender === 'masculino' ? '/path/to/chef-masculino.jpg' : '/path/to/chef-femenino.jpg';
-        return new ChefEntity(chef);
-      });
-    } catch (error) {
-      console.error("Error fetching Chefs:", error);
-    }
+  created() {
+    this.loadChefs(); // Llama a loadChefs para cargar los chefs al crear el componente
   },
 };
 </script>
@@ -193,7 +201,7 @@ export default {
       <pv-card v-for="chef in filteredChefs" :key="chef.id" class="chef-card">
         <template #header>
           <button class="favorite-button" @click="toggleFavorite(chef)">
-            <i :class="chef.favorite ? 'fas fa-heart' : 'far fa-heart'"></i>
+            <i :class="chef.isFavorite ? 'fas fa-heart' : 'far fa-heart'"></i>
           </button>
           <h3>{{ chef.name }}</h3>
         </template>
@@ -212,13 +220,16 @@ export default {
         :item="chef"
         :isEdit="isEdit"
         :isVisible="createAndEditDialogIsVisible"
+        @chef-updated="updateChef"
         @cancel-requested="onCancelRequested"
         @save-requested="onSaveRequested"
     />
   </div>
 </template>
 
+
 <style scoped>
+
 .chef-container {
   height: 80vh;
   margin-top: 80px;
