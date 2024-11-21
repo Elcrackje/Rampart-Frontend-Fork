@@ -8,6 +8,9 @@ import DishListComponent from "../dishes/pages/dish-list.component.vue";
 import UserProfileComponent from "../profile/pages/profile-page.component.vue";
 import FavoritePageComponent from "../favorites/pages/favorite-page.component.vue";
 import PageNotFoundComponent from "../public/pages/page-not-found.component.vue";
+import {authenticationGuard} from "../iam/services/authentication.guard.js";
+import SignInComponent from "../iam/pages/sign-in.component.vue";
+import SignUpComponent from "../iam/pages/sign-up.component.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -21,6 +24,8 @@ const router = createRouter({
         { path: '/',                        redirect: '/home' },
         { path: '/dishes',   name: 'dishes', component: DishListComponent, meta: { title: 'Recipes'}},
         { path: '/favorites',   name: 'favorites', component: FavoritePageComponent, meta: { title: 'Favoritos'}},
+        { path: '/sign-in',                 name: 'sign-in',    component: SignInComponent,             meta: { title: 'Sign In'}},
+        { path: '/sign-up',                 name: 'sign-up',    component: SignUpComponent,             meta: { title: 'Sign Up'}},
         {path: '/:pathMatch(.*)*', component: PageNotFoundComponent},
     ]
 });
@@ -30,6 +35,6 @@ router.beforeEach((to,
                    next) => {
     let baseTitle = 'Sabores Cercanos';
     document.title = `${baseTitle} | ${to.meta['title']}`;
-    next();
+    authenticationGuard(to, from, next);
 });
 export default router;
