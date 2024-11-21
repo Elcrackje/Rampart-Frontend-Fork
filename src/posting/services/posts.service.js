@@ -1,7 +1,7 @@
 import http from "../../shared/services/http-common.js";
 
 export class PostService {
-    resourceEndpoint = '/posts';
+    resourceEndpoint = '';
 
     getAll() {
         return http.get(this.resourceEndpoint);
@@ -22,5 +22,4 @@ export class PostService {
     delete(id) {
         return http.delete(`${this.resourceEndpoint}/${id}`);
     }
-
 }

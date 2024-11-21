@@ -36,6 +36,7 @@ import SelectButton from "primevue/selectbutton";
 import Image from "primevue/image";
 import Datepicker from "primevue/datepicker";
 import '@fortawesome/fontawesome-free/css/all.css';
+import {createPinia} from "pinia";
 
 const app = createApp(App);
 
@@ -75,6 +76,10 @@ app.component('pv-button', Button)
 app.use(i18n);
 
 app.use(router);
+
+// Pinia
+const pinia = createPinia();
+app.use(pinia);
 
 app.mount('#app');
 

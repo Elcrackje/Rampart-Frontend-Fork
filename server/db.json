@@ -24,14 +24,14 @@
       "id": 1,
       "dishId": 1,
       "stock": 12,
-      "publishDate": "2024-11-10",
+      "publishDate": "2024-11-21",
       "pricePerUnit": 12
     },
     {
       "id": 2,
       "dishId": 3,
       "stock": 13,
-      "publishDate": "2024-11-13",
+      "publishDate": "2024-11-22",
       "pricePerUnit": 13
     }
   ],
@@ -97,6 +97,8 @@
     {
       "id": 1,
       "name": "Juan Perez",
+      "isfavorite": true,
+      "gender": "masculino",
       "rating": 3.3,
       "isFavorite": true,
       "gender": "masculino"
@@ -106,11 +108,15 @@
       "name": "Lala Lopez",
       "isFavorite": true,
       "gender": "femenino",
-      "rating": 4.5
+      "rating": 4.5,
+      "imageUrl": "https://github.com/Rampart-SaboresCercanos/FrontEnd/blob/develop/src/assets/chefs/femenino.png?raw=true",
+      "favorite": false
     },
     {
       "id": 3,
       "name": "Estefano Jaque",
+      "isfavorite": true,
+      "gender": "masculino",
       "rating": 2,
       "isFavorite": true,
       "gender": "masculino"
@@ -146,8 +152,30 @@
         "Fríe los filetes en abundante aceite caliente hasta que estén dorados y crujientes.",
         "Sirve la milanesa acompañada del puré de papas."
       ],
+      "favorite": false
+    },
+    {
+      "id": 2,
+      "chefId": 2,
+      "nameOfDish": "Spaghetti a la boloñesa",
+      "ingredients": [
+        "200g de spaghetti",
+        "150g de carne molida",
+        "1 lata de tomate triturado",
+        "1 cebolla",
+        "1 diente de ajo",
+        "Aceite de oliva",
+        "Sal y pimienta",
+        "Queso parmesano al gusto"
+      ],
+      "preparationSteps": [
+        "Cocina los spaghetti según las instrucciones del paquete.",
+        "En una sartén, calienta el aceite y sofríe la cebolla y el ajo picados.",
+        "Agrega la carne molida y cocina hasta que esté dorada.",
+        "Incorpora el tomate triturado, sal y pimienta, y deja cocinar a fuego lento.",
+        "Sirve los spaghetti con la salsa y espolvorea con queso parmesano."
+      ],
       "favorite": false,
-      "price": 14.5
     },
     {
       "id": 3,
@@ -170,7 +198,6 @@
         "Sirve con miel y frutas al gusto."
       ],
       "favorite": true,
-      "price": 17.5
     }
   ]
 }

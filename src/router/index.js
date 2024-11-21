@@ -8,6 +8,9 @@ import DishListComponent from "../dishes/pages/dish-list.component.vue";
 import UserProfileComponent from "../profile/pages/profile-page.component.vue";
 import FavoritePageComponent from "../favorites/pages/favorite-page.component.vue";
 import PageNotFoundComponent from "../public/pages/page-not-found.component.vue";
+import {authenticationGuard} from "../iam/services/authentication.guard.js";
+import SignInComponent from "../iam/pages/sign-in.component.vue";
+import SignUpComponent from "../iam/pages/sign-up.component.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -19,8 +22,10 @@ const router = createRouter({
         { path: "/posts", name: 'posts', component: PostListComponent, meta: { title: 'Posts'}},
         { path: '/user-profile',            name: 'userProfile', component: UserProfileComponent, meta: { title: 'User Profile'} }, // Nueva ruta
         { path: '/',                        redirect: '/home' },
-        { path: '/recipes',   name: 'recipes', component: DishListComponent, meta: { title: 'Recipes'}},
+        { path: '/dishes',   name: 'dishes', component: DishListComponent, meta: { title: 'Recipes'}},
         { path: '/favorites',   name: 'favorites', component: FavoritePageComponent, meta: { title: 'Favoritos'}},
+        { path: '/sign-in',                 name: 'sign-in',    component: SignInComponent,             meta: { title: 'Sign In'}},
+        { path: '/sign-up',                 name: 'sign-up',    component: SignUpComponent,             meta: { title: 'Sign Up'}},
         {path: '/:pathMatch(.*)*', component: PageNotFoundComponent},
     ]
 });
@@ -28,8 +33,8 @@ const router = createRouter({
 router.beforeEach((to,
                    from,
                    next) => {
-    let baseTitle = 'ACME Learning Center';
+    let baseTitle = 'Sabores Cercanos';
     document.title = `${baseTitle} | ${to.meta['title']}`;
-    next();
+    authenticationGuard(to, from, next);
 });
 export default router;

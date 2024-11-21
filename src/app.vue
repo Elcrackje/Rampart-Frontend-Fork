@@ -13,7 +13,7 @@ export default {
         {label: 'Cocineros', to: '/chefs'},
         {label: 'Publicaciones', to: '/posts'},
         {label: 'Pedidos', to: '/orders'},
-        {label: 'Recetas', to: '/recipes'},
+        {label: 'Recetas', to: '/dishes'},
         {label: 'Perfil', to: '/user-profile'},
         {label: 'Favoritos', to: '/favorites'},
       ]
@@ -43,6 +43,12 @@ export default {
                        v-slot="{ navigate, href }"
                        :to="item.to" custom>
             <pv-button class="p-button-text no-border" :href="href" @click="navigate">{{ item.label }}</pv-button>
+          </router-link>
+          <router-link to="/sign-in">
+            <pv-button class="toolbar-icon" id="sign-in-icon">Sign In</pv-button>
+          </router-link>
+          <router-link to="/sign-up">
+            <pv-button class="toolbar-icon" id="sign-up-icon">Sign Up</pv-button>
           </router-link>
         </div>
       </template>
