@@ -1,3 +1,16 @@
 {
-
+  "filters": "Filters",
+  "orders": "Orders",
+  "edit order": "Edit order",
+  "cancel order": "Cancel order",
+  "order": "Order",
+  "customerId": "Customer ID",
+  "orderDate": "Order Date",
+  "deliveryDate": "Delivery Date",
+  "deliveryTime": "Delivery Time",
+  "paymentMethod": "Payment Method",
+  "status": "Status",
+  "pending":"Pending",
+  "in preparation":"In preparation",
+  "completed":"Completed"
 }

@@ -167,7 +167,7 @@ export default {
 
 <template>
   <div class="title">
-    <h3>Orders</h3>
+    <h3>{{$t("orders")}}</h3>
     <div class="main-container">
       <!-- Filtros de búsqueda -->
 
@@ -185,20 +185,20 @@ export default {
       <div class="p-container">
         <!-- Columna 1: Pendiente -->
         <div class="status-column">
-          <h4>Pendiente</h4>
+          <h4>{{$t("pending")}}</h4>
           <div v-for="order in getOrdersByStatus('pendiente')" :key="order.id" class="cards">
             <pv-card>
               <template #header>
                 <h2>{{$t("order")}} : #{{ order.id }}</h2>
               </template>
               <template #content>
-                <p><strong>ClienteId:</strong> {{ order.customerId }}</p>
-                <p><strong>Fecha de la orden:</strong> {{ order.orderDate }}</p>
-                <p><strong>Fecha de entrega:</strong> {{ order.deliveryDate }}</p>
-                <p><strong>Hora de entrega:</strong> {{ order.deliveryTime }}</p>
-                <p><strong>Metodo de pago:</strong> {{ order.paymentMethod }}</p>
+                <p><strong>{{$t("customerId")}}:</strong> {{ order.customerId }}</p>
+                <p><strong>{{$t("orderDate")}}:</strong> {{ order.orderDate }}</p>
+                <p><strong>{{$t("deliveryDate")}}:</strong> {{ order.deliveryDate }}</p>
+                <p><strong>{{$t("deliveryTime")}}:</strong> {{ order.deliveryTime }}</p>
+                <p><strong>{{$t("paymentMethod")}}:</strong> {{ order.paymentMethod }}</p>
 
-                <p><strong>Estado:</strong> {{ order.status }}</p>
+                <p><strong>{{$t("status")}}:</strong> {{ order.status }}</p>
                 <!--
                 <p><strong>Platillos:</strong></p>
 
@@ -245,20 +245,20 @@ export default {
 
         <!-- Columna 2: En preparación -->
         <div class="status-column">
-          <h4>En preparación</h4>
+          <h4>{{$t("in preparation")}}</h4>
           <div v-for="order in getOrdersByStatus('en preparacion')" :key="order.id" class="cards">
             <pv-card>
               <template #header>
                 <h2>{{$t("order")}} : #{{ order.id }}</h2>
               </template>
               <template #content>
-                <p><strong>ClienteId:</strong> {{ order.customerId }}</p>
-                <p><strong>Fecha de la orden:</strong> {{ order.orderDate }}</p>
-                <p><strong>Fecha de entrega:</strong> {{ order.deliveryDate }}</p>
-                <p><strong>Hora de entrega:</strong> {{ order.deliveryTime }}</p>
-                <p><strong>Metodo de pago:</strong> {{ order.paymentMethod }}</p>
+                <p><strong>{{$t("customerId")}}:</strong> {{ order.customerId }}</p>
+                <p><strong>{{$t("orderDate")}}:</strong> {{ order.orderDate }}</p>
+                <p><strong>{{$t("deliveryDate")}}:</strong> {{ order.deliveryDate }}</p>
+                <p><strong>{{$t("deliveryTime")}}:</strong> {{ order.deliveryTime }}</p>
+                <p><strong>{{$t("paymentMethod")}}:</strong> {{ order.paymentMethod }}</p>
 
-                <p><strong>Estado:</strong> {{ order.status }}</p>
+                <p><strong>{{$t("status")}}:</strong> {{ order.status }}</p>
                 <!--
                 <p><strong>Platillos:</strong></p>
                 <div>
@@ -303,20 +303,20 @@ export default {
 
         <!-- Columna 3: Completado -->
         <div class="status-column">
-          <h4>Completado</h4>
+          <h4>{{$t("completed")}}</h4>
           <div v-for="order in getOrdersByStatus('completado')" :key="order.id" class="cards">
             <pv-card>
               <template #header>
                 <h2>{{$t("order")}} : #{{ order.id }}</h2>
               </template>
               <template #content>
-                <p><strong>ClienteId:</strong> {{ order.customerId }}</p>
-                <p><strong>Fecha de la orden:</strong> {{ order.orderDate }}</p>
-                <p><strong>Fecha de entrega:</strong> {{ order.deliveryDate }}</p>
-                <p><strong>Hora de entrega:</strong> {{ order.deliveryTime }}</p>
-                <p><strong>Metodo de pago:</strong> {{ order.paymentMethod }}</p>
+                <p><strong>{{$t("customerId")}}:</strong> {{ order.customerId }}</p>
+                <p><strong>{{$t("orderDate")}}:</strong> {{ order.orderDate }}</p>
+                <p><strong>{{$t("deliveryDate")}}:</strong> {{ order.deliveryDate }}</p>
+                <p><strong>{{$t("deliveryTime")}}:</strong> {{ order.deliveryTime }}</p>
+                <p><strong>{{$t("paymentMethod")}}:</strong> {{ order.paymentMethod }}</p>
 
-                <p><strong>Estado:</strong> {{ order.status }}</p>
+                <p><strong>{{$t("status")}}:</strong> {{ order.status }}</p>
                 <!--
                 <p><strong>Platillos:</strong></p>
 

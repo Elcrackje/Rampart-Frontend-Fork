@@ -1,3 +1,16 @@
 {
-
+  "filters": "Filtros",
+  "orders": "Ordenes",
+  "edit order": "Editar orden",
+  "cancel order": "Cancelar orden",
+  "order": "Orden",
+  "customerId": "Id del cliente",
+  "orderDate": "Fecha de la orden",
+  "deliveryDate": "Fecha de entrega",
+  "deliveryTime": "Tiempo de entrega",
+  "paymentMethod": "Metodo de pago",
+  "status": "Estado",
+  "pending":"Pendiente",
+  "in preparation":"En preparacion",
+  "completed":"Completado"
 }
