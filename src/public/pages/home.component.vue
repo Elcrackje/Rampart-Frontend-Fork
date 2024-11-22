@@ -1,11 +1,17 @@
 <script>
+import { PostService } from '/src/posting/services/posts.service.js';
+import { ChefService } from '/src/chefs/services/chef.service.js';
+import { DishService } from '/src/dishes/services/dish.service.js';
 import axios from 'axios';
 
 export default {
   name: 'HomePage',
   data() {
     return {
-      popularDishes: []
+      popularDishes: [],
+      postService: new PostService(),  // Instancia del servicio PostService
+      chefService: new ChefService(),  // Instancia del servicio ChefService
+      dishService: new DishService()   // Instancia del servicio DishService
     };
   },
   methods: {
@@ -13,9 +19,9 @@ export default {
       try {
         // Obtener las publicaciones, los chefs y los platos
         const [postsResponse, chefsResponse, dishesResponse] = await Promise.all([
-          axios.get('http://localhost:3000/posts'),
-          axios.get('http://localhost:3000/chefs'),
-          axios.get('http://localhost:3000/dishes')
+          this.postService.getAll(),  // Obtener todos los posts
+          this.chefService.getAll(),  // Obtener todos los chefs
+          this.dishService.getAll()   // Obtener todos los platos
         ]);
 
         const posts = postsResponse.data;

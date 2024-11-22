@@ -1,24 +1,4 @@
 {
-  "userProfile": {
-    "id": 1,
-    "photo": "https://github.com/Rampart-SaboresCercanos/FrontEnd/blob/develop/src/assets/me.jpg?raw=true",
-    "name": "Diego Rosado",
-    "email": "rosadoiporre@gmail.com",
-    "birthDate": "01/01/1990",
-    "address": "Calle 1 Urb. San Felipe 257",
-    "paymentMethod": "Efectivo",
-    "cardNumber": "4772 **** **** 8898",
-    "yapeNumber": "987789789",
-    "cashPayment": false,
-    "preferences": [
-      "Pescados y Mariscos",
-      "Comida China",
-      "Comida Internacional",
-      "Comida Saludable",
-      "Hamburguesas y Sandwiches",
-      "Sushi"
-    ]
-  },
   "posts": [
     {
       "id": 1,
@@ -97,8 +77,6 @@
     {
       "id": 1,
       "name": "Juan Perez",
-      "isfavorite": true,
-      "gender": "masculino",
       "rating": 3.3,
       "isFavorite": true,
       "gender": "masculino"
@@ -108,18 +86,14 @@
       "name": "Lala Lopez",
       "isFavorite": true,
       "gender": "femenino",
-      "rating": 4.5,
-      "imageUrl": "https://github.com/Rampart-SaboresCercanos/FrontEnd/blob/develop/src/assets/chefs/femenino.png?raw=true",
-      "favorite": false
+      "rating": 4.5
     },
     {
       "id": 3,
       "name": "Estefano Jaque",
-      "isfavorite": true,
-      "gender": "masculino",
-      "rating": 2,
       "isFavorite": true,
-      "gender": "masculino"
+      "gender": "masculino",
+      "rating": 2
     },
     {
       "id": 4,
@@ -197,7 +171,7 @@
         "Cocina por ambos lados hasta dorar.",
         "Sirve con miel y frutas al gusto."
       ],
-      "favorite": true,
+      "favorite": true
     }
   ]
 }
