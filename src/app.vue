@@ -14,7 +14,6 @@ export default {
         {label: 'Publicaciones', to: '/posts'},
         {label: 'Pedidos', to: '/orders'},
         {label: 'Recetas', to: '/dishes'},
-        {label: 'Perfil', to: '/user-profile'},
         {label: 'Favoritos', to: '/favorites'},
       ]
     }

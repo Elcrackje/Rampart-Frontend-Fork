@@ -5,7 +5,6 @@ import ChefListComponent from "../chefs/pages/chef-list.component.vue";
 import OrderListComponent from "../orders/pages/order-list.component.vue";
 import PostListComponent from "../posting/pages/post-list.component.vue";
 import DishListComponent from "../dishes/pages/dish-list.component.vue";
-import UserProfileComponent from "../profile/pages/profile-page.component.vue";
 import FavoritePageComponent from "../favorites/pages/favorite-page.component.vue";
 import PageNotFoundComponent from "../public/pages/page-not-found.component.vue";
 import {authenticationGuard} from "../iam/services/authentication.guard.js";
@@ -20,7 +19,6 @@ const router = createRouter({
         { path: '/chefs',   name: 'chefs', component: ChefListComponent, meta: { title: 'Chefs'}},
         { path: '/orders',   name: 'orders', component: OrderListComponent, meta: { title: 'Orders'}},
         { path: "/posts", name: 'posts', component: PostListComponent, meta: { title: 'Posts'}},
-        { path: '/user-profile',            name: 'userProfile', component: UserProfileComponent, meta: { title: 'User Profile'} }, // Nueva ruta
         { path: '/',                        redirect: '/home' },
         { path: '/dishes',   name: 'dishes', component: DishListComponent, meta: { title: 'Recipes'}},
         { path: '/favorites',   name: 'favorites', component: FavoritePageComponent, meta: { title: 'Favoritos'}},
