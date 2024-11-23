@@ -12,5 +12,61 @@
   "status": "Status",
   "pending":"Pending",
   "in preparation":"In preparation",
-  "completed":"Completed"
+  "completed":"Completed",
+
+  "home": {
+    "welcomeMessage": "Welcome, {name}!",
+    "explorePrompt": "Explore delicious dishes and place your order.",
+    "popularDishes": "Most Popular Dishes",
+    "cookName": "Cook: {name}",
+    "rating": "Rating: {rating} ⭐",
+    "orders": "Orders: {count}",
+    "viewMorePosts": "View More Posts"
+  },
+
+  "chefs": {
+    "title": "Our Chefs",
+    "addChefButton": "Add Chef",
+    "searchByName": "Search by name",
+    "searchByRating": "Search by rating",
+    "imageAlt": "Image of {name}",
+    "rating": "Rating",
+    "editButton": "Edit",
+    "deleteButton": "Delete"
+  },
+
+  "routes": {
+    "home": "Home",
+    "about": "About us",
+    "chefs": "Chefs",
+    "orders": "Orders",
+    "posts": "Posts",
+    "dishes": "Recipes",
+    "favorites": "Favorites",
+    "signIn": "Sign In",
+    "signUp": "Sign Up"
+  },
+
+  "favorites": {
+    "chefs": "Favorite Chefs",
+    "recipes": "Favorite Recipes",
+    "rating": "Rating",
+    "ingredients": "Ingredients",
+    "preparationSteps": "Preparation Steps",
+    "publishedBy": "Published by",
+    "unknownChef": "Unknown Chef"
+  },
+
+  "dishes": {
+    "title": "Recipes from our chefs",
+    "searchPlaceholder": "Search recipes by name or ingredients",
+    "createNewDish": "Create new recipe",
+    "publishedBy": "Published by",
+    "unknownChef": "Unknown chef",
+    "ingredients": "Ingredients",
+    "preparationSteps": "Preparation steps",
+    "edit": "Edit",
+    "delete": "Delete"
+  }
 }
+

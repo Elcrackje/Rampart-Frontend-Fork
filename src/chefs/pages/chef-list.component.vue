@@ -186,15 +186,25 @@ export default {
 
 <template>
   <div class="chef-container">
-    <h2 class="chef-title">Nuestros chefs</h2>
+    <h2 class="chef-title">{{ $t('chefs.title') }}</h2>
 
     <!-- Botón para agregar un nuevo chef -->
-    <button class="add-chef-button" @click="onNewItem">Agregar Chef</button>
+    <button class="add-chef-button" @click="onNewItem">
+      {{ $t('chefs.addChefButton') }}
+    </button>
 
     <!-- Cuadros de búsqueda para nombre y rating -->
     <div class="search-container">
-      <pv-input-text v-model="searchName" placeholder="Buscar por nombre" class="search-bar"></pv-input-text>
-      <pv-input-text v-model="searchRating" placeholder="Buscar por rating" class="search-bar"></pv-input-text>
+      <pv-input-text
+          v-model="searchName"
+          :placeholder="$t('chefs.searchByName')"
+          class="search-bar"
+      ></pv-input-text>
+      <pv-input-text
+          v-model="searchRating"
+          :placeholder="$t('chefs.searchByRating')"
+          class="search-bar"
+      ></pv-input-text>
     </div>
 
     <div class="chef-grid">
@@ -206,10 +216,18 @@ export default {
           <h3>{{ chef.name }}</h3>
         </template>
         <template #content>
-          <img :src="chef.imageUrl" alt="Imagen de {{ chef.name }}" class="chef-image"/>
-          <p><strong>Rating:</strong> {{ chef.rating }}</p>
-          <button class="edit-chef-button" @click="onEditItem(chef)">Editar</button>
-          <button class="delete-chef-button" @click="confirmDeleteChef(chef)">Eliminar</button>
+          <img
+              :src="chef.imageUrl"
+              :alt="$t('chefs.imageAlt', { name: chef.name })"
+              class="chef-image"
+          />
+          <p><strong>{{ $t('chefs.rating') }}:</strong> {{ chef.rating }}</p>
+          <button class="edit-chef-button" @click="onEditItem(chef)">
+            {{ $t('chefs.editButton') }}
+          </button>
+          <button class="delete-chef-button" @click="confirmDeleteChef(chef)">
+            {{ $t('chefs.deleteButton') }}
+          </button>
         </template>
       </pv-card>
     </div>
@@ -226,7 +244,6 @@ export default {
     />
   </div>
 </template>
-
 
 <style scoped>
 

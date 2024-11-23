@@ -1,44 +1,46 @@
 <template>
   <div>
-    <h1 class="section-title">Chefs Favoritos</h1>
+    <!-- Sección de Chefs Favoritos -->
+    <h1 class="section-title">{{ $t('favorites.chefs') }}</h1>
     <div class="grid-container">
-      <div v-for="chef in chefs" :key="chef.id" class="card-item">
+      <div v-for="chef in chefs.filter(chef => chef.isFavorite)" :key="chef.id" class="card-item">
         <pv-card>
           <template #header>
             <div class="header-container">
               <button class="favorite-button" @click="toggleFavorite(chef)">
-                <i :class="chef.favorite ? 'fas fa-heart favorite-icon red-heart' : 'far fa-heart favorite-icon red-heart'"></i>
+                <i :class="chef.favorite ? 'fas fa-heart favorite-icon red-heart' : 'fas fa-heart favorite-icon red-heart'"></i>
               </button>
             </div>
             <h3>{{ chef.name }}</h3>
           </template>
           <template #content>
             <img :src="chef.imageUrl" alt="Imagen de {{ chef.name }}" class="chef-image" />
-            <p><strong>Calificación:</strong> {{ chef.rating }}</p>
+            <p><strong>{{ $t('favorites.rating') }}:</strong> {{ chef.rating }}</p>
           </template>
         </pv-card>
       </div>
     </div>
 
-    <h1 class="section-title">Recetas Favoritas</h1>
+    <!-- Sección de Recetas Favoritas -->
+    <h1 class="section-title">{{ $t('favorites.recipes') }}</h1>
     <div class="grid-container">
       <div v-for="dish in dishes" :key="dish.id" class="card-item">
         <pv-card>
           <template #header>
             <div class="header-container">
               <button class="favorite-button" @click="toggleFavorite1(dish)">
-                <i :class="dish.favorite ? 'fas fa-heart favorite-icon red-heart' : 'far fa-heart favorite-icon red-heart'"></i>
+                <i :class="dish.favorite ? 'fas fa-heart favorite-icon red-heart' : 'fas fa-heart favorite-icon red-heart'"></i>
               </button>
             </div>
             <h3>{{ dish.nameOfDish }}</h3>
           </template>
           <template #content>
-            <p><strong>Publicado por:</strong> {{ getChefFromId(dish.chefId)?.name || 'Chef desconocido' }}</p>
-            <p><strong>Ingredientes:</strong></p>
+            <p><strong>{{ $t('favorites.publishedBy') }}:</strong> {{ getChefFromId(dish.chefId)?.name || $t('favorites.unknownChef') }}</p>
+            <p><strong>{{ $t('favorites.ingredients') }}:</strong></p>
             <ul>
               <li v-for="ingredient in dish.ingredients" :key="ingredient">{{ ingredient }}</li>
             </ul>
-            <p><strong>Pasos de preparación:</strong></p>
+            <p><strong>{{ $t('favorites.preparationSteps') }}:</strong></p>
             <ol>
               <li v-for="step in dish.preparationSteps" :key="step">{{ step }}</li>
             </ol>
@@ -56,58 +58,62 @@ import { DishEntity } from "../../dishes/model/dish.entity.js";
 import { DishService } from "../../dishes/services/dish.service.js";
 
 export default {
-  name: "favotite-page.component",
+  name: "favorite-page.component",
   data() {
     return {
-      chefs: [],
-      dishes: [],
-      chefdish: [],
-      chefService: new ChefService(),
-      dishService: new DishService(),
+      chefs: [], // Lista de chefs favoritos
+      dishes: [], // Lista de recetas favoritas
+      chefdish: [], // Lista de todos los chefs
+      chefService: new ChefService(), // Servicio de chefs
+      dishService: new DishService(), // Servicio de platos
     };
   },
   methods: {
+    // Método para obtener chef por ID
     getChefFromId(id) {
       return this.chefs.find((chef) => chef.id === id);
     },
+    // Método para alternar el estado de favorito de un chef
     async toggleFavorite(chef) {
-      chef.favorite = !chef.favorite;
+      chef.isFavorite = !chef.isFavorite;
       try {
         await this.chefService.update(chef.id, chef);
-        if (!chef.favorite) {
+        if (!chef.isFavorite) {
           this.chefs = this.chefs.filter(c => c.id !== chef.id);
         }
       } catch (error) {
-        console.error("Error updating favorite status:", error);
+        console.error("Error actualizando el estado de favorito:", error);
       }
     },
+    // Método para alternar el estado de favorito de una receta
     async toggleFavorite1(dish) {
       dish.favorite = !dish.favorite;
       try {
         await this.dishService.update(dish.id, dish);
         if (!dish.favorite) {
-          this.dishes = this.dishes.filter(c => c.id !== dish.id);
+          this.dishes = this.dishes.filter(d => d.id !== dish.id);
         }
       } catch (error) {
-        console.error("Error updating favorite status:", error);
+        console.error("Error actualizando el estado de favorito:", error);
       }
     },
   },
   created() {
+    // Cargar chefs favoritos
     this.chefService.findByFavorite().then((response) => {
       this.chefs = response.data.map((chef) => new ChefEntity(chef));
     }).catch((error) => console.error(error));
 
+    // Cargar recetas favoritas
     this.dishService.findByFavorite().then((response) => {
       this.dishes = response.data.map((dish) => new DishEntity(dish));
     }).catch((error) => console.error(error));
 
-    this.chefService.getAll()
-        .then(response => {
-          this.chefdish = response.data.map((chefdish) => new ChefEntity(chefdish));
-          console.log(this.chefdish);
-        }).catch(error => {
-      console.error("Error fetching Chefs:", error);
+    // Obtener todos los chefs
+    this.chefService.getAll().then(response => {
+      this.chefdish = response.data.map((chefdish) => new ChefEntity(chefdish));
+    }).catch(error => {
+      console.error("Error obteniendo chefs:", error);
     });
   },
 };

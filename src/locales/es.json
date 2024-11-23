@@ -12,5 +12,60 @@
   "status": "Estado",
   "pending":"Pendiente",
   "in preparation":"En preparacion",
-  "completed":"Completado"
+  "completed":"Completado",
+
+  "home": {
+    "welcomeMessage": "¡Bienvenido, {name}!",
+    "explorePrompt": "Explora deliciosos platos y haz tu pedido.",
+    "popularDishes": "Platos Más Populares",
+    "cookName": "Cocinero: {name}",
+    "rating": "Rating: {rating} ⭐",
+    "orders": "Pedidos: {count}",
+    "viewMorePosts": "Ver Más Publicaciones"
+  },
+
+  "chefs": {
+    "title": "Nuestros chefs",
+    "addChefButton": "Agregar Chef",
+    "searchByName": "Buscar por nombre",
+    "searchByRating": "Buscar por rating",
+    "imageAlt": "Imagen de {name}",
+    "rating": "Rating",
+    "editButton": "Editar",
+    "deleteButton": "Eliminar"
+  },
+
+  "routes": {
+    "home": "Inicio",
+    "about": "Acerca de nosotros",
+    "chefs": "Chefs",
+    "orders": "Pedidos",
+    "posts": "Publicaciones",
+    "dishes": "Recetas",
+    "favorites": "Favoritos",
+    "signIn": "Iniciar sesión",
+    "signUp": "Registrarse"
+  },
+
+  "favorites": {
+    "chefs": "Chefs Favoritos",
+    "recipes": "Recetas Favoritas",
+    "rating": "Calificación",
+    "ingredients": "Ingredientes",
+    "preparationSteps": "Pasos de Preparación",
+    "publishedBy": "Publicado por",
+    "unknownChef": "Chef desconocido"
+  },
+
+  "dishes": {
+    "title": "Las recetas de nuestros chefs",
+    "searchPlaceholder": "Buscar recetas por nombre o ingredientes",
+    "createNewDish": "Crear nueva receta",
+    "publishedBy": "Publicado por",
+    "unknownChef": "Chef desconocido",
+    "ingredients": "Ingredientes",
+    "preparationSteps": "Pasos de preparación",
+    "edit": "Editar",
+    "delete": "Eliminar"
+  }
 }

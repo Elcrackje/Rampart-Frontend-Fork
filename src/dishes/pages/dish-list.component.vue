@@ -1,8 +1,8 @@
 <template>
   <div class="dish-container">
-    <h2 class="dish-title">Las recetas de nuestros chefs</h2>
-    <pv-input-text v-model="searchQuery" placeholder="Buscar recetas por nombre o ingredientes" class="search-bar"></pv-input-text>
-    <button @click="openCreateDialog">Crear nueva receta</button>
+    <h2 class="dish-title">{{ $t('dishes.title') }}</h2>
+    <pv-input-text v-model="searchQuery" :placeholder="$t('dishes.searchPlaceholder')" class="search-bar"></pv-input-text>
+    <button @click="openCreateDialog">{{ $t('dishes.createNewDish') }}</button>
     <div class="dish-grid">
       <pv-card v-for="dish in filteredDishes" :key="dish.id" class="dish-card">
         <template #header>
@@ -12,19 +12,19 @@
           <h3>{{ dish.nameOfDish }}</h3>
         </template>
         <template #content>
-          <p><strong>Publicado por:</strong> {{ getChefFromId(dish.chefId)?.name || 'Chef desconocido' }}</p>
-          <p><strong>Ingredientes:</strong></p>
+          <p><strong>{{ $t('dishes.publishedBy') }}:</strong> {{ getChefFromId(dish.chefId)?.name || $t('dishes.unknownChef') }}</p>
+          <p><strong>{{ $t('dishes.ingredients') }}:</strong></p>
           <ul>
             <li v-for="ingredient in dish.ingredients" :key="ingredient">{{ ingredient }}</li>
           </ul>
-          <p><strong>Pasos de preparación:</strong></p>
+          <p><strong>{{ $t('dishes.preparationSteps') }}:</strong></p>
           <ol>
             <li v-for="step in dish.preparationSteps" :key="step">{{ step }}</li>
           </ol>
         </template>
         <template #footer>
-          <button @click="openEditDialog(dish)">Editar</button>
-          <button @click="deleteDish(dish.id)">Eliminar</button>
+          <button @click="openEditDialog(dish)">{{ $t('dishes.edit') }}</button>
+          <button @click="deleteDish(dish.id)">{{ $t('dishes.delete') }}</button>
         </template>
       </pv-card>
     </div>

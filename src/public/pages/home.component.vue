@@ -80,27 +80,27 @@ export default {
   <div class="home-page">
     <!-- Sección de bienvenida -->
     <section class="welcome-section">
-      <h2>¡Bienvenido, Diego!</h2>
-      <p>Explora deliciosos platos y haz tu pedido.</p>
+      <h2>{{ $t('home.welcomeMessage', { name: 'Diego' }) }}</h2>
+      <p>{{ $t('home.explorePrompt') }}</p>
     </section>
 
     <!-- Sección de platos populares -->
     <section class="popular-dishes">
-      <h2>Platos Más Populares</h2>
+      <h2>{{ $t('home.popularDishes') }}</h2>
       <div class="dishes-container">
         <div class="dish-card" v-for="dish in popularDishes" :key="dish.id">
           <div class="dish-info">
-            <h3>{{ dish.name }}</h3>  <!-- Nombre del plato -->
-            <p>Cocinero: {{ dish.cookName }}</p>  <!-- Nombre del chef -->
-            <p>Rating: {{ dish.rating }} ⭐</p>  <!-- Rating del chef -->
-            <p>Pedidos: {{ dish.stock }}</p> <!-- Stock disponible -->
+            <h3>{{ dish.name }}</h3> <!-- Nombre del plato -->
+            <p>{{ $t('home.cookName', { name: dish.cookName }) }}</p> <!-- Nombre del chef -->
+            <p>{{ $t('home.rating', { rating: dish.rating }) }}</p> <!-- Rating del chef -->
+            <p>{{ $t('home.orders', { count: dish.stock }) }}</p> <!-- Pedidos -->
           </div>
         </div>
       </div>
 
       <!-- Botón para ver más publicaciones -->
       <pv-button
-          label="Ver Más Publicaciones"
+          :label="$t('home.viewMorePosts')"
           icon="pi pi-arrow-right"
           class="p-button-success"
           @click="goToMorePosts"

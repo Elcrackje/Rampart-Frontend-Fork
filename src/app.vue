@@ -52,6 +52,7 @@ export default {
         </div>
       </template>
       <template #end>
+        <language-switcher></language-switcher>
       </template>
     </pv-toolbar>
   </header>
