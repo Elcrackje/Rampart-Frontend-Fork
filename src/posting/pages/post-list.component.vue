@@ -119,11 +119,13 @@ export default {
 </script>
 
 <template>
-  <h2 style="text-align:center; margin-top: 5rem">Publicaciones</h2>
+  <h2 style="text-align:center; margin-top: 5rem">{{ $t('posts.title') }}</h2>
   <create-post-button @postsUpdated="reloadPosts" style="margin-bottom: 1rem"></create-post-button><br>
-  <pv-input-text v-model="searchQuery" placeholder="Buscar por plato, ingredientes o chef"></pv-input-text>
+  <pv-input-text v-model="searchQuery" :placeholder="$t('posts.searchPlaceholder')"></pv-input-text>
   <div class="flex items-center justify-content-center gap-2" style="margin-top: 1rem">
-    <pv-date-picker v-if="!showAllDates" v-model="selectedDate"></pv-date-picker><pv-checkbox v-model="showAllDates" input-id="ShowAll" binary></pv-checkbox><label for="ShowAll"> Show All </label>
+    <pv-date-picker v-if="!showAllDates" v-model="selectedDate"></pv-date-picker>
+    <pv-checkbox v-model="showAllDates" input-id="ShowAll" binary></pv-checkbox>
+    <label for="ShowAll">{{ $t('posts.showAll') }}</label>
   </div>
   <div class="post-grid" v-if="filteredPosts">
     <div v-for="post in filteredPosts" :key="post.id">
@@ -131,9 +133,10 @@ export default {
     </div>
   </div>
   <div v-else>
-    <p>No se encontraron publicaciones que coincidan con los criterios de búsqueda.</p>
+    <p>{{ $t('posts.noPostsFound') }}</p>
   </div>
 </template>
+
 
 <style scoped>
 

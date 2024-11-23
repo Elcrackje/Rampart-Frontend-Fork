@@ -67,6 +67,41 @@
     "preparationSteps": "Preparation steps",
     "edit": "Edit",
     "delete": "Delete"
+  },
+
+  "posts": {
+    "title": "Posts",
+    "searchPlaceholder": "Search by dish, ingredients, or chef",
+    "showAll": "Show All",
+    "noPostsFound": "No posts found matching the search criteria."
+  },
+
+  "createPost": {
+    "createPostButton": "Create Post",
+    "dialogHeader": "Create Post",
+    "selectChef": "Select a Chef",
+    "selectDish": "Select a Dish",
+    "enterStock": "Enter Stock",
+    "enterUnitPrice": "Enter Unit Price",
+    "submitButton": "Submit"
+  },
+
+  "postDisplay": {
+    "chef": "Chef",
+    "rating": "Rating",
+    "dish": "Dish",
+    "stock": "Stock",
+    "deliveryDate": "Delivery Date",
+    "unitPrice": "Unit Price",
+    "viewIngredients": "View Ingredients",
+    "placeOrder": "Place Order",
+    "ingredientListHeader": "Ingredient list of {dishName}",
+    "orderHeader": "Place order for {dishName}",
+    "amountOfDishes": "Amount of Dishes",
+    "deliveryTime": "Delivery Time",
+    "totalPrice": "Total Price",
+    "submitButton": "Submit",
+    "loading": "Loading data..."
   }
 }
 

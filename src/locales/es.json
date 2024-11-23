@@ -67,5 +67,40 @@
     "preparationSteps": "Pasos de preparación",
     "edit": "Editar",
     "delete": "Eliminar"
+  },
+
+  "posts": {
+    "title": "Publicaciones",
+    "searchPlaceholder": "Buscar por plato, ingredientes o chef",
+    "showAll": "Mostrar Todo",
+    "noPostsFound": "No se encontraron publicaciones que coincidan con los criterios de búsqueda."
+  },
+
+  "createPost": {
+    "createPostButton": "Crear Publicación",
+    "dialogHeader": "Crear Publicación",
+    "selectChef": "Seleccione un Cocinero",
+    "selectDish": "Seleccione un Plato",
+    "enterStock": "Ingrese el stock",
+    "enterUnitPrice": "Ingrese el precio unitario",
+    "submitButton": "Enviar"
+  },
+
+  "postDisplay": {
+    "chef": "Chef",
+    "rating": "Calificación",
+    "dish": "Plato",
+    "stock": "Stock",
+    "deliveryDate": "Fecha de Entrega",
+    "unitPrice": "Precio por Unidad",
+    "viewIngredients": "Ver Ingredientes",
+    "placeOrder": "Hacer Pedido",
+    "ingredientListHeader": "Lista de ingredientes de {dishName}",
+    "orderHeader": "Hacer pedido de {dishName}",
+    "amountOfDishes": "Cantidad de Platos",
+    "deliveryTime": "Hora de entrega",
+    "totalPrice": "Total a pagar",
+    "submitButton": "Enviar",
+    "loading": "Cargando datos..."
   }
 }

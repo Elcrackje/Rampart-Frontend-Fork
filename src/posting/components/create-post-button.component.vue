@@ -90,24 +90,25 @@ export default {
 
 <template>
   <template v-if="chefs && dishes">
-    <pv-button style="margin-bottom: 1rem" label="Crear Publicación" icon="pi pi-plus-circle" @click="openDialog"></pv-button>
-    <pv-dialog v-model:visible="dialogVisible" modal header="Crear Publicación">
-      <pv-select style="margin-bottom: 1rem" v-model="selectedChef" :options="chefs" optionLabel="name" placeholder="Seleccione un Cocinero"></pv-select>
+    <pv-button style="margin-bottom: 1rem" :label="$t('createPost.createPostButton')" icon="pi pi-plus-circle" @click="openDialog"></pv-button>
+    <pv-dialog v-model:visible="dialogVisible" modal :header="$t('createPost.dialogHeader')">
+      <pv-select style="margin-bottom: 1rem" v-model="selectedChef" :options="chefs" optionLabel="name" :placeholder="$t('createPost.selectChef')" ></pv-select>
       <template v-if="selectedChef != null">
-        <pv-select v-model="selectedDish" :options="this.getDishesFromChefId(selectedChef.id)" optionLabel="nameOfDish" placeholder="Seleccione un Plato"></pv-select>
-        <pv-input-number v-model="stock" placeholder="Ingrese el stock" inputId="integerOnly" :min="1"></pv-input-number>
-        <pv-input-number v-model="unitPrice" placeholder="Ingrese el precio unitario" inputId="currency-pe" mode="currency" currency="PEN" :min="1"></pv-input-number>
+        <pv-select v-model="selectedDish" :options="this.getDishesFromChefId(selectedChef.id)" optionLabel="nameOfDish" :placeholder="$t('createPost.selectDish')" ></pv-select>
+        <pv-input-number v-model="stock" :placeholder="$t('createPost.enterStock')" inputId="integerOnly" :min="1"></pv-input-number>
+        <pv-input-number v-model="unitPrice" :placeholder="$t('createPost.enterUnitPrice')" inputId="currency-pe" mode="currency" currency="PEN" :min="1"></pv-input-number>
         <pv-date-picker v-model="publishDate" :min-date="today"></pv-date-picker>
       </template>
       <template v-if="selectedChef != null && selectedDish != null && stock != null && publishDate != null">
-        <pv-button type="submit" severity="primary" label="Submit" @click="submitPost"/>
+        <pv-button type="submit" severity="primary" :label="$t('createPost.submitButton')" @click="submitPost"/>
       </template>
       <template v-else>
-        <pv-button type="submit" severity="secondary" label="Submit" disabled/>
+        <pv-button type="submit" severity="secondary" :label="$t('createPost.submitButton')" disabled/>
       </template>
     </pv-dialog>
   </template>
 </template>
+
 
 <style scoped>
 

@@ -105,21 +105,21 @@ export default {
         <div class="container">
           <pv-card class="card-chef">
             <template #title>
-              <p><span class="pi pi-user"></span> Chef:<br> {{chefProp.name}}</p>
+              <p><span class="pi pi-user"></span> {{ $t('postDisplay.chef') }}:<br> {{chefProp.name}}</p>
             </template>
             <template #content>
-              <p>Rating: {{chefProp.rating}} <span class="pi pi-star"></span></p>
+              <p>{{ $t('postDisplay.rating') }}: {{chefProp.rating}} <span class="pi pi-star"></span></p>
             </template>
           </pv-card>
           <pv-card class="card-dish">
             <template #header>
-              <h3 style="margin-top: 2rem">Plato: {{this.dishProp.nameOfDish}}</h3>
-              <!img :src="dishProp.image" :alt="dishProp.nameOfDish" width="100%" height="45%">
-              <p>Stock: {{this.postProp.stock}}</p>
-              <p>Fecha de Entrega: {{this.postProp.publishDate}}</p>
-              <p>Precio por Unidad: S/{{this.postProp.pricePerUnit}}</p>
-              <pv-button label="Ver Ingredientes" icon="pi pi-eye" @click="ingredientListVisible = true" severity="info"></pv-button><br>
-              <pv-button style="margin-top: 0.5rem" label="Hacer Pedido" icon="pi pi-plus-circle" @click="openOrderDialog" severity="warn"></pv-button><br>
+              <h3 style="margin-top: 2rem">{{ $t('postDisplay.dish') }}: {{this.dishProp.nameOfDish}}</h3>
+              <!-- <img :src="dishProp.image" :alt="dishProp.nameOfDish" width="100%" height="45%"> -->
+              <p>{{ $t('postDisplay.stock') }}: {{this.postProp.stock}}</p>
+              <p>{{ $t('postDisplay.deliveryDate') }}: {{this.postProp.publishDate}}</p>
+              <p>{{ $t('postDisplay.unitPrice') }}: S/{{this.postProp.pricePerUnit}}</p>
+              <pv-button :label="$t('postDisplay.viewIngredients')" icon="pi pi-eye" @click="ingredientListVisible = true" severity="info"></pv-button><br>
+              <pv-button style="margin-top: 0.5rem" :label="$t('postDisplay.placeOrder')" icon="pi pi-plus-circle" @click="openOrderDialog" severity="warn"></pv-button><br>
               <pv-button style="margin-top: 0.5rem" icon="pi pi-trash" @click="deletePost" severity="danger"></pv-button>
             </template>
           </pv-card>
@@ -127,27 +127,27 @@ export default {
       </template>
     </pv-card>
 
-    <pv-dialog v-model:visible="ingredientListVisible" modal draggable="draggable" :header="'Lista de ingredientes de '+ dishProp.nameOfDish">
+    <pv-dialog v-model:visible="ingredientListVisible" modal draggable="draggable" :header="$t('postDisplay.ingredientListHeader', {dishName: dishProp.nameOfDish})">
       <div style="text-align: center" v-for="ingredient in this.dishProp.ingredients">
         {{ingredient}}
       </div>
     </pv-dialog>
 
-    <pv-dialog v-model:visible="orderDialogVisible" modal :header="'Hacer pedido de ' + this.dishProp.nameOfDish">
-      <p>Cantidad de Platos</p>
+    <pv-dialog v-model:visible="orderDialogVisible" modal :header="$t('postDisplay.orderHeader', {dishName: this.dishProp.nameOfDish})">
+      <p>{{ $t('postDisplay.amountOfDishes') }}</p>
       <pv-input-number v-model="amount" inputId="integeronly" :min="1" :useGrouping="false" fluid></pv-input-number>
-      <p>Hora de entrega:</p>
+      <p>{{ $t('postDisplay.deliveryTime') }}:</p>
       <pv-date-picker v-model="deliveryTime" showIcon iconDisplay="input" timeOnly inputId="templateDisplay" :minDate="minOrderTime">
         <template #inputicon="slotProps">
           <i class="pi pi-clock" @click="slotProps.clickCallback" />
         </template>
       </pv-date-picker><br>
-      <p>Total a pagar: S/{{ finalPrice }}</p>
-      <pv-button style="margin-top: 0.5rem;margin-left: 30%" icon="pi pi-check" label="Submit" @click="submitOrder"></pv-button>
+      <p>{{ $t('postDisplay.totalPrice') }}: S/{{ finalPrice }}</p>
+      <pv-button style="margin-top: 0.5rem;margin-left: 30%" icon="pi pi-check" :label="$t('postDisplay.submitButton')" @click="submitOrder"></pv-button>
     </pv-dialog>
   </template>
   <template v-else>
-    <p>Cargando datos...</p>
+    <p>{{ $t('postDisplay.loading') }}</p>
   </template>
 </template>
 
